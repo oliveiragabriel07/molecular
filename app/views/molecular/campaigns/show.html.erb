@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @campaign.owner %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @campaign.subject %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @campaign.body %>
+</p>
+
+<p>
+  <strong>Recipients query:</strong>
+  <%= @campaign.recipients_query %>
+</p>
+
+<p>
+  <strong>Sent at:</strong>
+  <%= @campaign.sent_at %>
+</p>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>
