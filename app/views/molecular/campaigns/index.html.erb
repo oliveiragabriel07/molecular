@@ -17,7 +17,7 @@
   <tbody>
     <% @campaigns.each do |campaign| %>
       <tr>
-        <td><%= campaign.owner %></td>
+        <td><%= campaign.owner_id %></td>
         <td><%= campaign.subject %></td>
         <td><%= campaign.body %></td>
         <td><%= campaign.recipients_query %></td>

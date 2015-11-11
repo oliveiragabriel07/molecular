@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110225621) do
+ActiveRecord::Schema.define(version: 20151111212111) do
 
   create_table "molecular_campaigns", force: :cascade do |t|
     t.integer  "owner_id"
@@ -25,5 +25,12 @@ ActiveRecord::Schema.define(version: 20151110225621) do
   end
 
   add_index "molecular_campaigns", ["owner_type", "owner_id"], name: "index_molecular_campaigns_on_owner_type_and_owner_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
