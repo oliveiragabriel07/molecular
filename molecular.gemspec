@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Gabriel Oliveira"]
   s.email       = ["oliveira.gabriel07@gmail.com"]
   s.homepage    = "https://github.com/oliveiragabriel07/molecular"
-  s.summary     = "Embeddedable email marketing solution."
+  s.summary     = "Embeddedable one-time marketing email solution."
   s.description = "Molecular message is the most reliable messaging delivery technology in the world."
   s.license     = "MIT"
 
