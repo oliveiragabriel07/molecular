@@ -1,3 +1,5 @@
+require 'molecular/routes'
+
 module Molecular
   class Engine < ::Rails::Engine
     isolate_namespace Molecular
@@ -5,8 +7,6 @@ module Molecular
     config.generators do |g|
       g.test_framework :rspec, fixture: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      g.assets false
-      g.helper false
     end
   end
 end
