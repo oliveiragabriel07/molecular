@@ -17,6 +17,7 @@ module Molecular
     def copy_migrations
       copy_migration "create_molecular_campaigns"
       copy_migration "create_molecular_recipients"
+      copy_migration "create_molecular_lists"
     end
 
     def self.next_migration_number(path)
