@@ -6,13 +6,13 @@ module Molecular
 
     source_root File.expand_path("../../../templates", __FILE__)
 
-    desc "Creates a molecular initializer at config/initializers"
+    desc "Generates a molecular initializer at config/initializers." \
+      "Generates a Molecular::Campaign model, copy migrations and add" \
+      "molecular routes"
 
     def copy_initializer
       template "molecular.rb", "config/initializers/molecular.rb"
     end
-
-    desc "add the migrations"
 
     def copy_migrations
       copy_migration "create_molecular_campaigns"
@@ -21,7 +21,16 @@ module Molecular
       copy_migration "create_molecular_events"
     end
 
-    def self.next_migration_number(path)
+    def copy_campaign_decorator
+      template "decorators/campaign_decorator.rb",
+               "app/decorators/models/molecular/campaign_decorator.rb"
+    end
+
+    # def add_molecular_routes
+    #   route "mount_molecular"
+    # end
+
+    def self.next_migration_number
       if !@prev_migration_nr
         @prev_migration_nr = Time.now.utc.strftime("%Y%m%d%H%M%S").to_i
       else
