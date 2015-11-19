@@ -15,11 +15,12 @@ module Molecular
     desc "add the migrations"
 
     def copy_migrations
-        copy_migration "create_molecular_campaigns"
+      copy_migration "create_molecular_campaigns"
+      copy_migration "create_molecular_recipients"
     end
 
     def self.next_migration_number(path)
-      unless @prev_migration_nr
+      if !@prev_migration_nr
         @prev_migration_nr = Time.now.utc.strftime("%Y%m%d%H%M%S").to_i
       else
         @prev_migration_nr += 1
@@ -32,7 +33,8 @@ module Molecular
         if self.class.migration_exists?("db/migrate", filename)
           say_status("skipped", "Migration #{filename}.rb already exists")
         else
-          migration_template "migrations/#{filename}.rb", "db/migrate/#{filename}.rb"
+          migration_template "migrations/#{filename}.rb",
+                             "db/migrate/#{filename}.rb"
         end
       end
   end
