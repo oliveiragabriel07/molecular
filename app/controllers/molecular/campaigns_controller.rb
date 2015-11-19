@@ -3,11 +3,11 @@ require_dependency "molecular/application_controller"
 module Molecular
   class CampaignsController < ApplicationController
     before_action :set_campaign, only: [:show, :edit, :update, :destroy]
-    before_action :create_campaign, only: :create
-    before_action :set_owner, only: :create
+    before_action :build_campaign, only: :create
 
     # GET /campaigns
     def index
+      # TODO: list only campaings owner by "user"
       @campaigns = Campaign.all
     end
 
@@ -48,15 +48,10 @@ module Molecular
       redirect_to campaigns_url, notice: 'Campaign was successfully destroyed.'
     end
 
-    protected
-      # This method may be overriden by application to set a different owner
-      def set_owner
-        @campaign.owner = current_user
-      end
-
     private
-      def create_campaign
+      def build_campaign
         @campaign = Campaign.new(campaign_params)
+        @campaign.owner = molecular_owner
       end
 
       # Use callbacks to share common setup or constraints between actions.

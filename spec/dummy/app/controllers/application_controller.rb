@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  def current_user
-    User.new(id: 0, email: "user@email.com")
+  # TODO: add method to ControllerInclusions on install script
+  def molecular_owner
+    User.find_or_initialize_by(email: "user@email.com")
   end
 end
