@@ -63,5 +63,9 @@ module Molecular
       def campaign_params
         params.require(:campaign).permit(:subject, :body, :recipients_query)
       end
+
+      def molecular_owner
+        current_user
+      end
   end
 end

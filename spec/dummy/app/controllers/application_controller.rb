@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # TODO: add method to ControllerInclusions on install script
-  def molecular_owner
+  def current_user
     User.find_or_initialize_by(email: "user@email.com")
   end
 end
