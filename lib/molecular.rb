@@ -11,3 +11,5 @@ module Molecular
     yield self
   end
 end
+
+require "molecular/controller_additions"

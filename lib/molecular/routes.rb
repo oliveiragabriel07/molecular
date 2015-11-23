@@ -1,11 +1,12 @@
 module ActionDispatch::Routing
   class Mapper
     def mount_molecular(options = {})
-      mod = "molecular"
-      controllers = Hash.new { |h, k| h[k] = "#{mod}/#{k}" }
+      controllers = Hash.new { |h, k| h[k] = "molecular/#{k}" }
       controllers.merge!(options)
 
-      resources :campaigns, controller: controllers[:campaigns]
+      resources :campaigns, controller: controllers[:campaigns] do
+        resources :events
+      end
     end
   end
 end
