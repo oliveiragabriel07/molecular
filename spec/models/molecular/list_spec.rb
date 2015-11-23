@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 module Molecular
   RSpec.describe List, type: :model do
