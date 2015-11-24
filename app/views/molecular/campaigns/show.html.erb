@@ -25,5 +25,9 @@
   <%= @campaign.sent_at %>
 </p>
 
+<p>
+  <%= link_to "Link", main_app.molecular_recipients_path if Rails.application.routes.url_helpers.method_defined?(:molecular_recipients_path) %>
+</p>
+
 <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
 <%= link_to 'Back', campaigns_path %>
