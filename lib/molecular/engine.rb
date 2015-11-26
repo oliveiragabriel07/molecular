@@ -1,4 +1,5 @@
 require 'molecular/routes'
+require 'mandrill-rails'
 
 module Molecular
   class Engine < ::Rails::Engine

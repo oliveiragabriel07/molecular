@@ -2,37 +2,49 @@ require_dependency "molecular/application_controller"
 
 module Molecular
   class EventsController < ApplicationController
-    before_action :set_event, only: [:show]
-
-    # GET /events
-    def index
-      @events = Event.all
-    end
-
-    # GET /events/1
-    def show
-    end
-
-    # POST /events
-    def create
-      @event = Event.new(event_params)
-
-      if @event.save
-        redirect_to @event, notice: 'Event was successfully created.'
-      else
-        render :new
-      end
-    end
+    include Mandrill::Rails::WebHookProcessor
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_event
-        @event = Event.find(params[:id])
+      def handle_open(payload)
+        # puts "--- OPEN ----------------------------------"
+        # puts payload.inspect
+        Event.create(label: payload['event'], list_id: payload.list_id)
       end
 
-      # Only allow a trusted parameter "white list" through.
-      def event_params
-        params.require(:event).permit(:list_id, :label, :value)
+      def handle_click(payload)
+        # puts payload.inspect
+      end
+
+      def handle_spam(event_payload)
+        # puts payload.inspect
+      end
+
+      def handle_unsub(payload)
+        # puts payload.inspect
+      end
+
+      def handle_reject(payload)
+        # puts payload.inspect
+      end
+
+      def handle_sync(payload)
+        # puts payload.inspect
+      end
+
+      def handle_send(payload)
+        # puts payload.inspect
+      end
+
+      def handle_deferral(payload)
+        # puts payload.inspect
+      end
+
+      def handle_hard_bounce(payload)
+        # puts payload.inspect
+      end
+
+      def handle_soft_bounce(payload)
+        # puts payload.inspect
       end
   end
 end

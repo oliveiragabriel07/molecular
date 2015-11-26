@@ -13,3 +13,4 @@ module Molecular
 end
 
 require "molecular/controller_additions"
+require "mandrill-rails/event_decorator"
