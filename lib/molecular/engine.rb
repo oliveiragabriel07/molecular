@@ -1,5 +1,6 @@
 require 'molecular/routes'
 require 'mandrill-rails'
+require 'jquery-rails'
 
 module Molecular
   class Engine < ::Rails::Engine
