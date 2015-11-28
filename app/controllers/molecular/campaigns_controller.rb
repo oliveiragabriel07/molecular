@@ -35,6 +35,8 @@ module Molecular
 
     # PATCH/PUT /campaigns/1
     def update
+      submit and return if params[:submit]
+
       if @campaign.update(campaign_params)
         redirect_to @campaign, notice: 'Campaign was successfully updated.'
       else
@@ -62,6 +64,11 @@ module Molecular
       # Only allow a trusted parameter "white list" through.
       def campaign_params
         params.require(:campaign).permit(:subject, :body, :recipients_query)
+      end
+
+      def submit
+        @campaign.enqueue
+        redirect_to @campaign, notice: 'Campaign was scheduled'
       end
   end
 end
