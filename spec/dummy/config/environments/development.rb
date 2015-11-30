@@ -16,6 +16,16 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mandrillapp.com',
+    port:                 587,
+    domain:               'heroku.com',
+    user_name:            ENV['MANDRILL_USERNAME'],
+    password:             ENV['MANDRILL_APIKEY'],
+    authentication:       'plain'
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
