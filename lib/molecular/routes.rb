@@ -5,7 +5,8 @@ module ActionDispatch::Routing
       controllers.merge!(options)
 
       resources :campaigns, controller: controllers[:campaigns]
-      resource :events, only: [:show, :create]
+      resource :events, controller: controllers[:events],
+                        only: [:show, :create]
     end
   end
 end

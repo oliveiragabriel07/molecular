@@ -1,7 +1,6 @@
 Molecular::Engine.routes.draw do
-  resources :campaigns do
-    resources :events
-  end
+  resources :campaigns
+  resource :events, only: [:show, :create]
 
   root to: 'campaigns#index'
 end
