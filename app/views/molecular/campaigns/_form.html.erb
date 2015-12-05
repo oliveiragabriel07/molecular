@@ -17,7 +17,8 @@
   </div>
   <div class="field">
     <%= f.label :body %><br>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, class: 'tinymce' %>
+    <%= tinymce %>
   </div>
   <div class="field">
     <%= f.label :recipients_query %><br>

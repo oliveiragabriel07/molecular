@@ -1,6 +1,8 @@
 require 'molecular/routes'
 require 'mandrill-rails'
 require 'jquery-rails'
+require 'tinymce-rails'
+require 'tinymce-rails-langs'
 
 module Molecular
   class Engine < ::Rails::Engine
@@ -16,5 +18,8 @@ module Molecular
       g.test_framework :rspec, fixture: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
+
+    # config.assets.paths << Rails.root.join("lib", "assets")
+    config.tinymce.install = :compile
   end
 end

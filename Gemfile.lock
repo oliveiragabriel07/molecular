@@ -7,6 +7,8 @@ PATH
       mandrill-rails
       rails (~> 4.2.4)
       sass-rails (~> 5.0)
+      tinymce-rails
+      tinymce-rails-langs
 
 GEM
   remote: https://rubygems.org/
@@ -86,7 +88,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mandrill-rails (1.4.0)
+    mandrill-rails (1.4.1)
       activesupport (>= 3.0.3)
     method_source (0.8.2)
     mime-types (2.6.2)
@@ -194,6 +196,10 @@ GEM
     thread_safe (0.3.5)
     tilt (2.0.1)
     tins (1.6.0)
+    tinymce-rails (4.3.1)
+      railties (>= 3.1.1)
+    tinymce-rails-langs (4.20140129)
+      tinymce-rails (~> 4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     vegas (0.1.11)

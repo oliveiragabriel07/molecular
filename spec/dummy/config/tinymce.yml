@@ -1,0 +1,30 @@
+default:
+    # TODO: get language from application
+    language: 'pt_BR'
+    # # TODO: add css with content_css config
+    # # content_css : '/mycontent.css'
+    max_width: 500
+    max_height: 500
+    min_width: 300
+    min_height: 300
+    plugins:
+        - advlist
+        - textcolor
+        - link
+        - image
+        - autolink
+        - code
+        - preview
+        - contextmenu
+        - imageupload
+    toolbar:
+        - >
+          fontselect fontsizeselect | bold italic underline forecolor |
+          alignleft aligncenter alignright alignjustify |
+          bullist numlist outdent indent | imageupload link | code preview
+    menubar: false
+    statusbar: false
+    resize: false
+    contextmenu: 'link image'
+    image_description: false
+    image_dimensions: false
