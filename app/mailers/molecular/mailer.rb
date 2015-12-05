@@ -1,6 +1,7 @@
 module Molecular
   # TODO: inherit from main_app mailer
   class Mailer < ActionMailer::Base
+    # TODO: definir no initializer
     default from: 'from@example.com'
 
     def campaign_email(campaign, list)
