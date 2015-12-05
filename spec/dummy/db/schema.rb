@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119210428) do
+ActiveRecord::Schema.define(version: 20151205140158) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.string   "file_id"
+    t.string   "file_filename"
+    t.integer  "file_size"
+    t.string   "file_content_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "attachments", ["target_type", "target_id"], name: "index_attachments_on_target_type_and_target_id"
 
   create_table "molecular_campaigns", force: :cascade do |t|
     t.integer  "owner_id"
