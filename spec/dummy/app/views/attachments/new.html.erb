@@ -1,1 +1,10 @@
-<p> Novo anexo </p>
+<%= form_for(@attachment, format: :json, authenticity_token: true) do |f| %>
+  <div class="field">
+    <%= f.label :file %><br>
+    <%= f.attachment_field :file, direct: true, presigned: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
