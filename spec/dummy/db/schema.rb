@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205140158) do
+ActiveRecord::Schema.define(version: 20151207203829) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "target_id"
@@ -43,8 +43,10 @@ ActiveRecord::Schema.define(version: 20151205140158) do
     t.integer  "list_id"
     t.string   "label"
     t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "payload"
+    t.datetime "triggered_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "molecular_events", ["list_id"], name: "index_molecular_events_on_list_id"

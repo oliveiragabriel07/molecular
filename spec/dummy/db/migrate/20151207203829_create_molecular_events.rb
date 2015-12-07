@@ -4,6 +4,8 @@ class CreateMolecularEvents < ActiveRecord::Migration
       t.references :list, index: true, foreign_key: true
       t.string :label
       t.string :value
+      t.text :payload
+      t.datetime :triggered_at
 
       t.timestamps null: false
     end
