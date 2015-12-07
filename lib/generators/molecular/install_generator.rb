@@ -30,7 +30,7 @@ module Molecular
     #   route "mount_molecular"
     # end
 
-    def self.next_migration_number
+    def self.next_migration_number(number = nil)
       if !@prev_migration_nr
         @prev_migration_nr = Time.now.utc.strftime("%Y%m%d%H%M%S").to_i
       else
