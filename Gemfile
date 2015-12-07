@@ -13,5 +13,5 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 gem 'jquery-rails'
-
 gem 'resque'
+gem "refile", require: "refile/rails"

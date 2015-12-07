@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require molecular/application
 //= require tinymce/plugins/imageupload/plugin
+//= require refile
 //= require_tree .
