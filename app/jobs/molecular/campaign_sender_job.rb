@@ -12,9 +12,8 @@ module Molecular
           "#{recipient.inspect}"
 
         # TODO: avoid duplicate email by checking if it was already sent
-        # list = campaign.lists.create(recipient: recipient)
-
-        Mailer.campaign_email(campaign, recipient).deliver_now
+        list = campaign.lists.create(recipient: recipient)
+        Mailer.campaign_email(campaign, list).deliver_now
         # TODO: check if this is needed
         Molecular::Event.create(list: list, label: 'queued')
       end
