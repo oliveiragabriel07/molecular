@@ -3,6 +3,7 @@ class CreateMolecularLists < ActiveRecord::Migration
     create_table :molecular_lists do |t|
       t.references :campaign
       t.references :recipient
+      t.integer :status, default: 0
 
       t.timestamps null: false
     end

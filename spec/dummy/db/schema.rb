@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207203829) do
+ActiveRecord::Schema.define(version: 20151207221507) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "target_id"
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(version: 20151207203829) do
   create_table "molecular_lists", force: :cascade do |t|
     t.integer  "campaign_id"
     t.integer  "recipient_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "status",       default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "molecular_recipients", force: :cascade do |t|
