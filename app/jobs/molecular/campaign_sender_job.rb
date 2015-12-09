@@ -3,19 +3,15 @@ module Molecular
     queue_as :campaigns
 
     def perform(campaign)
-      Rails.logger.debug "#{self.class.name}: Performing campaign sender " \
-        "job with campaign: #{campaign.inspect}"
-
       campaign.recipients.find_each do |u|
         recipient = Molecular::Recipient.find_or_create_by(email: u.email)
-        Rails.logger.debug "#{self.class.name}: Queuing campaign to " \
-          "#{recipient.inspect}"
 
-        # TODO: avoid duplicate email by checking if it was already sent
-        list = campaign.lists.create(recipient: recipient)
+        list = campaign.lists.find_or_initialize_by(recipient: recipient)
+        next unless list.new_record?
+
+        list.save
+        list.events.create(label: 'queued')
         Mailer.campaign_email(campaign, list).deliver_now
-        # TODO: check if this is needed
-        Molecular::Event.create(list: list, label: 'queued')
       end
     end
   end
