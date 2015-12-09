@@ -60,3 +60,6 @@ Style/AndOr:
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*'
+
+Metrics/MethodLength:
+  Max: 15
