@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207221507) do
+ActiveRecord::Schema.define(version: 20151209200310) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "target_id"
@@ -40,30 +40,30 @@ ActiveRecord::Schema.define(version: 20151207221507) do
   add_index "molecular_campaigns", ["owner_type", "owner_id"], name: "index_molecular_campaigns_on_owner_type_and_owner_id"
 
   create_table "molecular_events", force: :cascade do |t|
-    t.integer  "list_id"
+    t.integer  "subscription_id"
     t.string   "label"
     t.string   "value"
     t.text     "payload"
     t.datetime "triggered_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "molecular_events", ["list_id"], name: "index_molecular_events_on_list_id"
-
-  create_table "molecular_lists", force: :cascade do |t|
-    t.integer  "campaign_id"
-    t.integer  "recipient_id"
-    t.integer  "status",       default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
+  add_index "molecular_events", ["subscription_id"], name: "index_molecular_events_on_subscription_id"
 
   create_table "molecular_recipients", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "molecular_subscriptions", force: :cascade do |t|
+    t.integer  "campaign_id"
+    t.integer  "recipient_id"
+    t.integer  "status",       default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|

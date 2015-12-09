@@ -7,48 +7,48 @@ module Molecular
 
     private
       def handle_open(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload))
       end
 
       def handle_click(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload).merge(value: payload['url']))
       end
 
       def handle_spam(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload))
       end
 
       def handle_unsub(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload))
       end
 
       def handle_reject(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload))
       end
 
       def handle_send(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload))
       end
 
       def handle_deferral(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload))
       end
 
       def handle_hard_bounce(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload)
           .merge(value: payload.bounce_description))
       end
 
       def handle_soft_bounce(payload)
-        return unless load_and_update_list(payload)
+        return unless load_and_update_subscription(payload)
         Event.create(event_params(payload)
           .merge(value: payload.bounce_description))
       end
@@ -57,16 +57,16 @@ module Molecular
         {
           label: payload['event'],
           triggered_at: payload['ts'],
-          list_id: payload.list_id,
+          subscription_id: payload.subscription_id,
           payload: payload.to_s
         }
       end
 
-      def load_and_update_list(payload)
-        return unless payload.list_id
-        list = List.find(payload.list_id)
-        list.update(status: payload.status) if payload.status
-        list
+      def load_and_update_subscription(payload)
+        return unless payload.subscription_id
+        subscription = Subscription.find(payload.subscription_id)
+        subscription.update(status: payload.status) if payload.status
+        subscription
       end
   end
 end

@@ -1,6 +1,6 @@
-class CreateMolecularLists < ActiveRecord::Migration
+class CreateMolecularSubscriptions < ActiveRecord::Migration
   def change
-    create_table :molecular_lists do |t|
+    create_table :molecular_subscriptions do |t|
       t.references :campaign
       t.references :recipient
       t.integer :status, default: 0

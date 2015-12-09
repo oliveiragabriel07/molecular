@@ -7,8 +7,7 @@ module Molecular
 
     # GET /campaigns
     def index
-      # TODO: list only campaings owner by "user"
-      @campaigns = Campaign.all
+      @campaigns = Campaign.where(owner: molecular_owner)
     end
 
     # GET /campaigns/1

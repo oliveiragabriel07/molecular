@@ -1,0 +1,6 @@
+<tr>
+  <td><%= subscription.status %></td>
+  <td><%= subscription.recipient.email %></td>
+  <td><%= subscription.events.where(label: 'open').count %></td>
+  <td><%= subscription.events.where(label: 'click').count %></td>
+<tr>

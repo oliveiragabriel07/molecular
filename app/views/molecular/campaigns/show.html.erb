@@ -38,14 +38,14 @@
   <table class="table">
     <thead>
       <tr>
-        <th><%= Molecular::List.human_attribute_name(:status) %></th>
+        <th><%= Molecular::Subscription.human_attribute_name(:status) %></th>
         <th>Email</th>
         <th>Opens</th>
         <th>Clicks</th>
       </tr>
     </thead>
     <tbody>
-      <%= render partial: "list", collection: @campaign.lists %>
+      <%= render partial: "subscription", collection: @campaign.subscriptions %>
     </tbody>
   </table>
 

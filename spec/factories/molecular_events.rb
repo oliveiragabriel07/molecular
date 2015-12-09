@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :molecular_event, class: 'Molecular::Event' do
-    list nil
+    subscription nil
     label "MyString"
     value "MyString"
   end

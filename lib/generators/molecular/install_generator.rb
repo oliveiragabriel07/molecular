@@ -17,7 +17,7 @@ module Molecular
     def copy_migrations
       copy_migration "create_molecular_campaigns"
       copy_migration "create_molecular_recipients"
-      copy_migration "create_molecular_lists"
+      copy_migration "create_molecular_subscriptions"
       copy_migration "create_molecular_events"
     end
 
