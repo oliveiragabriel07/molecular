@@ -26,10 +26,32 @@
 </p>
 
 <p>
-  <%= link_to "Link", main_app.molecular_recipients_path if
+  <%= link_to "Link", main_app.molecular_recipients_path(q: @campaign.recipients_query) if
     Rails.application.routes.url_helpers.method_defined?(:molecular_recipients_path) %>
 </p>
 
-<%= link_to 'Send', campaign_path(@campaign, submit: true), method: :put %> |
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<% if @campaign.sent_at %>
+  <p>
+    <strong>Outbound:</strong>
+  </p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Molecular::List.human_attribute_name(:status) %></th>
+        <th>Email</th>
+        <th>Opens</th>
+        <th>Clicks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "list", collection: @campaign.lists %>
+    </tbody>
+  </table>
+
+<% else %>
+  <%= link_to 'Send', campaign_path(@campaign, submit: true), method: :put %> |
+  <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<% end %>
+
 <%= link_to 'Back', campaigns_path %>

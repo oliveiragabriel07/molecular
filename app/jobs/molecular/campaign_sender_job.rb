@@ -9,10 +9,14 @@ module Molecular
         list = campaign.lists.find_or_initialize_by(recipient: recipient)
         next unless list.new_record?
 
-        list.save
-        list.events.create(label: 'queued')
-        Mailer.campaign_email(campaign, list).deliver_now
+        if list.save
+          list.events.create(label: 'queued')
+          Mailer.campaign_email(campaign, list).deliver_now
+        end
       end
+
+      # update campaing status
+      campaign.update(sent_at: Time.zone.now)
     end
   end
 end
