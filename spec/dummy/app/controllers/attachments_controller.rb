@@ -10,7 +10,10 @@ class AttachmentsController < ApplicationController
         json = {url: Refile.attachment_url(@attachment, :file)}.to_json
         format.json { render json: json, status: :created }
       else
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @attachment.errors.full_messages,
+                 status: :unprocessable_entity
+        end
       end
     end
   end

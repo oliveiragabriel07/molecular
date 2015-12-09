@@ -21,7 +21,7 @@ default:
         - >
           fontselect fontsizeselect | bold italic underline forecolor |
           alignleft aligncenter alignright alignjustify |
-          bullist numlist outdent indent | imageupload link | code preview
+          bullist numlist outdent indent | imageupload link | code preview |
     menubar: false
     statusbar: false
     resize: false

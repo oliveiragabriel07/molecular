@@ -14,10 +14,16 @@ jQuery ->
       if top.tinymce.activeEditor
         top.tinymce.activeEditor.insertContent('<img src="' + data.url + '"/>')
       else
-        alert(data.url);
+        console.debug(data.url);
 
     .error (data)->
-      alert(data)
+      if top.tinymce.activeEditor
+        top.tinymce.activeEditor.notificationManager.open
+          text: data.responseJSON.join('.')
+          icon: 'help'
+      else
+        console.debug(data);
+
     .complete ->
       if top.tinymce.activeEditor
         top.tinymce.activeEditor.windowManager.close()
