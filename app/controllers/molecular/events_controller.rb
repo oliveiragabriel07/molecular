@@ -3,48 +3,70 @@ require_dependency "molecular/application_controller"
 module Molecular
   class EventsController < ApplicationController
     include Mandrill::Rails::WebHookProcessor
+    ignore_unhandled_events!
 
     private
       def handle_open(payload)
-        # puts "--- OPEN ----------------------------------"
-        # puts payload.inspect
-        Event.create(label: payload['event'], list_id: payload.list_id)
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload))
       end
 
       def handle_click(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload).merge(value: payload['url']))
       end
 
-      def handle_spam(event_payload)
-        # puts payload.inspect
+      def handle_spam(payload)
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload))
       end
 
       def handle_unsub(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload))
       end
 
       def handle_reject(payload)
-        # puts payload.inspect
-      end
-
-      def handle_sync(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload))
       end
 
       def handle_send(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload))
       end
 
       def handle_deferral(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload))
       end
 
       def handle_hard_bounce(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload)
+          .merge(value: payload.bounce_description))
       end
 
       def handle_soft_bounce(payload)
-        # puts payload.inspect
+        return unless load_and_update_list(payload)
+        Event.create(event_params(payload)
+          .merge(value: payload.bounce_description))
+      end
+
+      def event_params(payload)
+        {
+          label: payload['event'],
+          triggered_at: payload['ts'],
+          list_id: payload.list_id,
+          payload: payload.to_s
+        }
+      end
+
+      def load_and_update_list(payload)
+        return unless payload.list_id
+        list = List.find(payload.list_id)
+        list.update(status: payload.status) if payload.status
+        list
       end
   end
 end
