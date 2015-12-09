@@ -78,6 +78,9 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    generator_spec (0.9.3)
+      activesupport (>= 3.0.0)
+      railties (>= 3.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     http-cookie (1.0.2)
@@ -229,6 +232,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   factory_girl_rails
+  generator_spec
   jquery-rails
   molecular!
   pry-byebug

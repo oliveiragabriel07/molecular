@@ -8,5 +8,6 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/public/tmp/cache/
 spec/dummy/public/tmp/store/
+spec/tmp
 
 .env
