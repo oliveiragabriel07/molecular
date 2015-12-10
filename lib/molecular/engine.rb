@@ -19,7 +19,6 @@ module Molecular
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
-    # config.assets.paths << Rails.root.join("lib", "assets")
     config.tinymce.install = :compile
   end
 end

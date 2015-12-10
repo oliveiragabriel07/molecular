@@ -1,6 +1,6 @@
 module Molecular
   class CampaignSenderJob < ActiveJob::Base
-    queue_as :campaigns
+    queue_as :molecular_campaigns
 
     def perform(campaign)
       campaign.recipients.find_each do |u|
