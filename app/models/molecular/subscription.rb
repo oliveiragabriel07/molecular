@@ -7,9 +7,12 @@ module Molecular
     belongs_to :recipient
     has_many :events
 
+    validates :campaign, presence: true
+    validates :recipient, presence: true
+
     def deliver
       events.create(label: 'queued')
-      Mailer.campaign_email(campaign, self).deliver_now
+      Mailer.campaign_email(id, campaign, recipient).deliver_now
     end
   end
 end
