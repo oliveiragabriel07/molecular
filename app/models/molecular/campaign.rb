@@ -3,6 +3,10 @@ module Molecular
     belongs_to :owner, polymorphic: true
     has_many :subscriptions
 
+    validates :subject, presence: true
+    validates :body, presence: true
+    validates :owner, presence: true
+
     def enqueue
       Molecular::CampaignSenderJob.perform_later self
     end
