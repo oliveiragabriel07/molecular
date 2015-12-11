@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry-byebug'
 
 RSpec.describe Molecular::CampaignsController, type: :controller do
   routes { Molecular::Engine.routes }
