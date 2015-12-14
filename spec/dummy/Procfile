@@ -1,2 +1,2 @@
 web: bundle exec rails s
-resque: env TERM_CHILD=1 RESQUE_TERM_TIMEOUT=10 LOGGING=1 QUEUE=campaigns bundle exec rake resque:work
+resque: env TERM_CHILD=1 RESQUE_TERM_TIMEOUT=10 LOGGING=1 QUEUE=molecular_campaigns bundle exec rake resque:work
