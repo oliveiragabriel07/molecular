@@ -46,5 +46,7 @@ module Molecular
         expect(subscription.events.last.label).to eq('queued')
       end
     end
+
+    # TODO: check emails is not sent twice
   end
 end

@@ -214,7 +214,7 @@ module Molecular
       end
 
       context 'without subscription' do
-        it 'does not create event' do
+        xit 'does not create event' do
         end
       end
     end

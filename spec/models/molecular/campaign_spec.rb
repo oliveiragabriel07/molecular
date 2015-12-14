@@ -47,7 +47,7 @@ module Molecular
           to change(Subscription, :count).by(1)
       end
 
-      context 'exisinting subscription' do
+      context 'existing subscription' do
         let!(:subscription) do
           create(:subscription, campaign: campaign, recipient: recipient)
         end

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry-byebug'
 
 module Molecular
   RSpec.describe CampaignSenderJob, type: :job do
@@ -25,7 +24,7 @@ module Molecular
     end
 
     context 'with exitings recipient' do
-      let!(:recipient) { create(:recipient) }
+      # OPTIMIZE: create factory recipients_with_emails
       before do
         users.each do |u|
           create(:recipient, email: u.email)
@@ -48,5 +47,7 @@ module Molecular
       CampaignSenderJob.perform_now(campaign)
       expect(campaign.sent_at).not_to be_nil
     end
+
+    # TODO: check sent_at is not updated
   end
 end
