@@ -1,3 +1,5 @@
 = Molecular
 
+{<img src="https://coveralls.io/repos/oliveiragabriel07/molecular/badge.svg?branch=master&service=github" alt="Coverage Status" />}[https://coveralls.io/github/oliveiragabriel07/molecular?branch=master]
+
 This project rocks and uses MIT-LICENSE.
