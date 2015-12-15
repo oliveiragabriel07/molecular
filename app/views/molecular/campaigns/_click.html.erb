@@ -1,8 +1,8 @@
 <li class="row">
   <div class="col-md-10">
-    <%= subscription.recipient.email %>
+    <%= link_to nil, click.value %>
   </div>
   <div class="col-md-2 text-right">
-    <strong><%= collection.count[subscription.id] %></strong>
+    <strong><%= collection.count[click.value] %></strong>
   </div>
 </li>

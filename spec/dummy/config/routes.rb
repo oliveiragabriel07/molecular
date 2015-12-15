@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   mount Resque::Server, at: '/resque'
 
   resource :attachments, only: [:new, :create]
+  root to: 'custom_molecular/campaigns#index'
 end

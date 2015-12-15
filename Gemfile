@@ -14,4 +14,6 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 gem 'jquery-rails'
 gem 'resque'
-gem "refile", require: "refile/rails"
+gem 'refile', require: 'refile/rails'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'sass-rails', '>= 3.2'

@@ -1,0 +1,41 @@
+<div class="container campaign-compose">
+  <div class="header text-center">
+    <h1>Review your campaign before sending ...</h1>
+  </div>
+
+  <ul class="list-unstyled strips">
+    <li>
+      <h4>Recipients</h4>
+
+      <p>
+        Campaign will be sent to
+
+        <% if Rails.application.routes.url_helpers.method_defined?(:molecular_recipients_path) %>
+          <%= link_to "(#{campaign.recipients.count} recipients)", main_app.molecular_recipients_path(q: campaign.recipients_query),
+            target:"_blank" %>
+        <% else %>
+          <%= "(#{campaign.recipients.count} recipients)" %>
+        <% end %>
+      </p>
+    </li>
+
+    <li>
+      <h4>Subject</h4>
+      "<%= campaign.subject %>"
+    </li>
+
+    <li>
+      <h4>Replies</h4>
+      All replies will go to <strong><%= "#{campaign.from_name} \<#{campaign.from}\>"%></strong>
+    </li>
+    <li>
+      <h4>Content</h4>
+      <%= link_to 'Preview campaign email content', "#", data: {toggle: "modal", target: "#mail-preview-modal"} %>
+    </li>
+  </ul>
+
+  <div class="actions">
+    <%= link_to 'Send',campaign_path(campaign, submit: true), method: :put, class: 'btn btn-primary' %>
+    <%= link_to 'Edit', edit_campaign_path(campaign), class: 'btn btn-default' %>
+  </div>
+</div>

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require molecular/application
 //= require tinymce/plugins/imageupload/plugin
 //= require refile

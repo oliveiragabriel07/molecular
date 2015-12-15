@@ -1,57 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "mail_preview_modal", locals: {campaign: @campaign} %>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @campaign.owner_id %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
-  <%= @campaign.subject %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @campaign.body %>
-</p>
-
-<p>
-  <strong>Recipients query:</strong>
-  <%= @campaign.recipients_query %>
-</p>
-
-<p>
-  <strong>Sent at:</strong>
-  <%= @campaign.sent_at %>
-</p>
-
-<p>
-  <%= link_to "Link", main_app.molecular_recipients_path(q: @campaign.recipients_query) if
-    Rails.application.routes.url_helpers.method_defined?(:molecular_recipients_path) %>
-</p>
-
-<% if @campaign.sent_at %>
-  <p>
-    <strong>Outbound:</strong>
-  </p>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th><%= Molecular::Subscription.human_attribute_name(:status) %></th>
-        <th>Email</th>
-        <th>Opens</th>
-        <th>Clicks</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: "subscription", collection: @campaign.subscriptions %>
-    </tbody>
-  </table>
-
+<% if @campaign.sent? %>
+  <%= render partial: 'report', locals: {campaign: @campaign} %>
 <% else %>
-  <%= link_to 'Send', campaign_path(@campaign, submit: true), method: :put %> |
-  <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
-<% end %>
+  <%= render partial: 'preview', locals: {campaign: @campaign} %>
+<%end%>
 
-<%= link_to 'Back', campaigns_path %>

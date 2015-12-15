@@ -1,0 +1,50 @@
+<li class="row">
+  <div class="col-md-6 clearfix">
+
+    <h4>
+      <%= link_to campaign.subject, campaign %>
+      <span class="label label-<%= if campaign.sent? then 'success' else 'default' end %>">
+        <%= if campaign.sent? then 'Sent' else 'Draft' end %>
+      </span>
+    </h4>
+
+    <p>
+      <%= "Sent on #{campaign.sent_at.strftime('%a, %d %b %Y %H:%M')}" if campaign.sent? %>
+    </p>
+  </div>
+
+  <%# OPTIMIZE: count events require new queries. Avoid N+1. Use counter_cache maybe? %>
+  <div class="col-md-5">
+      <div class="clearfix">
+        <div class="data pull-left text-center">
+          <h4><%= campaign.recipients.count%></h4>
+          <p>Recipients</p>
+        </div>
+
+        <% if campaign.sent? %>
+          <div class="data pull-left text-center">
+            <div>
+              <h4>
+                <%= number_to_percentage(campaign.open_rate, precision: 1) %>
+              </h4>
+              <p><%= "#{campaign.unique_opens} Opens" %></p>
+            </div>
+          </div>
+
+          <div class="data pull-left text-center">
+            <div>
+              <h4>
+                <%= number_to_percentage(campaign.click_rate, precision: 1) %>
+              </h4>
+              <p><%= "#{campaign.unique_clicks} Clicks" %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  </div>
+  <div class="col-md-1 meta-actions text-left">
+    <%= link_to campaign, method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <i class="glyphicon glyphicon-trash"></i>
+    <% end %>
+  </div>
+</li>
