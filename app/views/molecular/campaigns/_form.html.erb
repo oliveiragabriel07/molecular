@@ -1,30 +1,51 @@
 <%= form_for(@campaign) do |f| %>
-  <% if @campaign.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
 
-      <ul>
-      <% @campaign.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <fieldset>
+    <% if @campaign.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
+
+        <ul>
+        <% @campaign.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :subject %>
+          <%= f.text_field :subject, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :from_name %><br>
+          <%= f.text_field :from_name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :from %><br>
+          <%= f.text_field :from, class: "form-control"%>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :recipients_query %><br>
+          <%= f.text_field :recipients_query, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="form-group editor">
+          <%= f.text_area :body, class: 'tinymce' %>
+          <%= tinymce %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </fieldset>
 
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body, class: 'tinymce' %>
-    <%= tinymce %>
-  </div>
-  <div class="field">
-    <%= f.label :recipients_query %><br>
-    <%= f.text_field :recipients_query %>
-  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save and preview", class: "btn btn-primary" %>
   </div>
 <% end %>

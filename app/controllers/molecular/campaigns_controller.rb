@@ -62,7 +62,9 @@ module Molecular
 
       # Only allow a trusted parameter "white list" through.
       def campaign_params
-        params.require(:campaign).permit(:subject, :body, :recipients_query)
+        params.
+          require(:campaign).
+          permit(:subject, :body, :recipients_query, :from, :from_name)
       end
 
       def submit

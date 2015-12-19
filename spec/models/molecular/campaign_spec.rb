@@ -19,6 +19,8 @@ module Molecular
         it { is_expected.to have_db_column(:sent_at).of_type(:datetime) }
         it { is_expected.to have_db_column(:created_at).of_type(:datetime) }
         it { is_expected.to have_db_column(:updated_at).of_type(:datetime) }
+        it { is_expected.to have_db_column(:from_name).of_type(:string) }
+        it { is_expected.to have_db_column(:from).of_type(:string) }
       end
     end
 
@@ -26,6 +28,8 @@ module Molecular
       it { is_expected.to validate_presence_of(:owner) }
       it { is_expected.to validate_presence_of(:subject) }
       it { is_expected.to validate_presence_of(:body) }
+      it { is_expected.to validate_presence_of(:from) }
+      it { is_expected.to validate_presence_of(:from_name) }
     end
 
     context 'factory' do
@@ -69,6 +73,31 @@ module Molecular
         expect(Molecular::CampaignSenderJob).to receive(:perform_later).
           with(campaign)
         campaign.enqueue
+      end
+    end
+
+    context '#sent?' do
+      xit 'TODO test sent? method' do
+      end
+    end
+
+    context '#open_rate' do
+      xit 'TODO test sent? method' do
+      end
+    end
+
+    context '#click_rate' do
+      xit 'TODO test sent? method' do
+      end
+    end
+
+    context '#unique_opens' do
+      xit 'TODO test sent? method' do
+      end
+    end
+
+    context '#unique_clicks' do
+      xit 'TODO test sent? method' do
       end
     end
   end

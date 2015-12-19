@@ -6,6 +6,8 @@ class CreateMolecularCampaigns < ActiveRecord::Migration
       t.text :body
       t.string :recipients_query
       t.datetime :sent_at
+      t.string :from
+      t.string :from_email
 
       t.timestamps null: false
     end

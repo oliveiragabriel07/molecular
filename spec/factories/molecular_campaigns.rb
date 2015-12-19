@@ -4,5 +4,7 @@ FactoryGirl.define do
     owner
     subject "subject"
     body "body"
+    from 'from@example'
+    from_name 'From Example'
   end
 end
