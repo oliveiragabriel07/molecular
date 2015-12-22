@@ -121,10 +121,10 @@
   </div>
 </div>
 
-<% if campaign.events.clicks.any? %>
+<% if campaign.events.clicks_by_link.any? %>
   <h2>Links clicked</h2>
 
-  <% clicks = campaign.events.clicks %>
+  <% clicks = campaign.events.clicks_by_link %>
   <ul class="list-unstyled sub-section strips">
     <%= render partial: 'click', collection: clicks, locals: {collection: clicks} %>
   </ul>

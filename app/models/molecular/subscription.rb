@@ -5,31 +5,23 @@ module Molecular
 
     belongs_to :campaign
     belongs_to :recipient
-    has_many :events
+    has_many :events, dependent: :destroy
 
     validates :campaign, presence: true
     validates :recipient, presence: true
 
-    scope :with_most_opens, lambda { |record_limit = 5|
-      joins(:events).where(molecular_events: {label: 'open'}).
-        group(:subscription_id).order("count(molecular_events.id) desc").
-        limit(record_limit)
+    scope :opened, -> { where('opens_count > ?', 0) }
+    scope :clicked, -> { where('clicks_count > ?', 0) }
+    scope :with_most_opens, lambda { |max = 5|
+      opened.order("opens_count desc").limit(max)
     }
 
-    # FIXME: add after_save callback to event to upgrade opens count
-    scope :opened, lambda {
-      distinct.joins(:events).where(molecular_events: {label: 'open'}).
-        group("molecular_events.id").having("count(molecular_events.id) > 0")
-    }
-
-    # FIXME: add after_save callback to event to upgrade clicks count
-    scope :clicked, lambda {
-      joins(:events).where(molecular_events: {label: 'click'}).
-        group("molecular_events.id").having("count(molecular_events.id) > 0")
-    }
+    def update_counter_cache!
+      update(opens_count: events.opens.count, clicks_count: events.clicks.count)
+    end
 
     def deliver
-      events.create(label: 'queued')
+      events.create_queued
       Mailer.campaign_email(id, campaign, recipient).deliver_now
     end
   end

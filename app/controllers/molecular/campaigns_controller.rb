@@ -7,7 +7,8 @@ module Molecular
 
     # GET /campaigns
     def index
-      @campaigns = Campaign.where(owner: molecular_owner)
+      @campaigns = Campaign.where(owner: molecular_owner).
+                   includes(:subscriptions)
     end
 
     # GET /campaigns/1

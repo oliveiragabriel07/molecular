@@ -17,6 +17,7 @@ ActiveRecord::Migrator.migrations_paths = [File.expand_path("../dummy/db/migrate
 ActiveRecord::Migrator.migrations_paths << File.expand_path('../../db/migrate', __FILE__)
 require 'rspec/rails'
 require 'shoulda/matchers'
+require 'shoulda/callback/matchers'
 require 'factory_girl_rails'
 
 Rails.backtrace_cleaner.remove_silencers!

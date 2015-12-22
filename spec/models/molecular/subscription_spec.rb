@@ -47,6 +47,43 @@ module Molecular
       end
     end
 
+    context '#update_counter_cache!' do
+      let!(:subscription) { create(:subscription) }
+      let!(:opens) { 14 }
+      let!(:clicks) { 8 }
+
+      before do
+        create_list(:event, opens, :open, subscription: subscription)
+        create_list(:event, clicks, :click, subscription: subscription)
+      end
+
+      it 'set opens_count' do
+        expect(subscription.opens_count).to eq(opens)
+      end
+
+      it 'set clicks_count' do
+        expect(subscription.clicks_count).to eq(clicks)
+      end
+    end
+
+    context 'scopes' do
+      context 'with_most_opens' do
+        let!(:most_open) { create(:subscription, opens_count: 10) }
+        let!(:less_open) { create(:subscription, opens_count: 5) }
+        let!(:not_open) { create(:subscription, opens_count: 0) }
+
+        it 'returns only opened subscriptions' do
+          expect(Molecular::Subscription.with_most_opens).
+            not_to include([not_open])
+        end
+
+        it 'returns ordered by opens_count' do
+          expect(Molecular::Subscription.with_most_opens).
+            to eq([most_open, less_open ])
+        end
+      end
+    end
+
     # TODO: check emails is not sent twice
   end
 end

@@ -1,7 +1,7 @@
 module Molecular
   class Campaign < ActiveRecord::Base
     belongs_to :owner, polymorphic: true
-    has_many :subscriptions
+    has_many :subscriptions, dependent: :destroy
     has_many :events, through: :subscriptions
 
     validates :subject, presence: true
@@ -46,19 +46,19 @@ module Molecular
     end
 
     def total_opens
-      events.where(label: 'open').count
+      events.opens.count
     end
 
     def total_clicks
-      events.where(label: 'click').count
+      events.clicks.count
     end
 
     def last_open
-      events.where(label: 'open').order(triggered_at: :desc).first
+      events.opens.order(triggered_at: :desc).first
     end
 
     def last_click
-      events.where(label: 'click').order(triggered_at: :desc).first
+      events.clicks.order(triggered_at: :desc).first
     end
 
     def bounces_count

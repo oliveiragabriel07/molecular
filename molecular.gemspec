@@ -38,5 +38,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'coveralls', '0.8.10'
   s.add_development_dependency 'shoulda-matchers', '2.8.0'
+  s.add_development_dependency 'shoulda-callback-matchers', '1.1.3'
   s.add_development_dependency 'faker'
 end
