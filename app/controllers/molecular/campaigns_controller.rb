@@ -68,8 +68,12 @@ module Molecular
       end
 
       def submit
-        @campaign.enqueue
-        redirect_to @campaign, notice: 'Campaign was scheduled'
+        if @campaign.sent?
+          redirect_to @campaign, alert: 'Campaign has already been sent'
+        else
+          @campaign.enqueue
+          redirect_to @campaign, notice: 'Campaign was scheduled'
+        end
       end
   end
 end

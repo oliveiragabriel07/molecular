@@ -11,6 +11,7 @@ module Molecular
     validates :from_name, presence: true
 
     def enqueue
+      update(sent_at: Time.zone.now)
       Molecular::CampaignSenderJob.perform_later self
     end
 

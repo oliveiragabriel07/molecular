@@ -41,13 +41,5 @@ module Molecular
       expect(campaign).to receive(:subscribe).exactly(users.count).times
       CampaignSenderJob.perform_now(campaign)
     end
-
-    it 'updates campaing sent_at' do
-      expect(campaign.sent_at).to be_nil
-      CampaignSenderJob.perform_now(campaign)
-      expect(campaign.sent_at).not_to be_nil
-    end
-
-    # TODO: check sent_at is not updated
   end
 end

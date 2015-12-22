@@ -103,6 +103,12 @@ RSpec.describe Molecular::CampaignsController, type: :controller do
         put :update, id: campaign.to_param, campaign: valid_attributes
         expect(response).to redirect_to(campaign)
       end
+
+      # xit 'updates campaing sent_at' do
+      #   expect(campaign.sent_at).to be_nil
+      #   CampaignSenderJob.perform_now(campaign)
+      #   expect(campaign.sent_at).not_to be_nil
+      # end
     end
 
     context "with invalid params" do
