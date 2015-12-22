@@ -8,7 +8,17 @@
   <%= render partial: "campaign", collection: @campaigns %>
 </ul>
 
-<%# TODO: paginate results (use kaminari) %>
-<%#= paginate @campaigns %>
+<%#
+  Workaround a kaminari issue with engine routes described in the link bellow:
+  https://github.com/amatsuda/kaminari/pull/322
 
-<br>
+  A fix has been submited, but the PR still not merged:
+  https://github.com/amatsuda/kaminari/pull/636
+
+  In Molecular, kaminari fails because the routes are dynamically inserted
+  into the main app by mount_molecular method.
+%>
+
+<% _with_routes main_app.routes do %>
+  <%= paginate @campaigns %>
+<% end %>

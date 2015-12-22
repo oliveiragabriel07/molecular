@@ -1,5 +1,6 @@
 require 'molecular/routes'
 require 'mandrill-rails'
+require 'kaminari'
 require 'jquery-rails'
 require 'tinymce-rails'
 require 'tinymce-rails-langs'

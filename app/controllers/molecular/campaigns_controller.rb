@@ -4,11 +4,11 @@ module Molecular
   class CampaignsController < ApplicationController
     before_action :set_campaign, only: [:show, :edit, :update, :destroy]
     before_action :build_campaign, only: :create
+    before_action :load_campaigns, only: :index
 
     # GET /campaigns
     def index
-      @campaigns = Campaign.where(owner: molecular_owner).
-                   includes(:subscriptions)
+      @campaigns = @campaigns.includes(:subscriptions).page(page).per(10)
     end
 
     # GET /campaigns/1
@@ -59,6 +59,14 @@ module Molecular
       # Use callbacks to share common setup or constraints between actions.
       def set_campaign
         @campaign = Campaign.find(params[:id])
+      end
+
+      def load_campaigns
+        @campaigns = Campaign.where(owner: molecular_owner)
+      end
+
+      def page
+        params[:page]
       end
 
       # Only allow a trusted parameter "white list" through.
