@@ -30,11 +30,11 @@ module Molecular
 
     # OPTIMIZE: extract to a decorator?
     def open_rate
-      100 * unique_opens.to_f / subscriptions.count
+      100 * unique_opens.to_f / (subscriptions.count.nonzero? || 1)
     end
 
     def click_rate
-      100 * unique_clicks.to_f / subscriptions.count
+      100 * unique_clicks.to_f / (subscriptions.count.nonzero? || 1)
     end
 
     def unique_opens
