@@ -1,10 +1,14 @@
 <div class="header">
-  <h1>Campaigns</h1>
+  <h1><%= t('.title')%></h1>
   <%= link_to 'Create campaign', new_campaign_path, class: 'btn btn-primary btn-add' %>
 </div>
+
 
 <ul class="campaigns-list strips list-unstyled">
   <%= render partial: "campaign", collection: @campaigns %>
 </ul>
+
+<%# TODO: paginate results (use kaminari) %>
+<%#= paginate @campaigns %>
 
 <br>

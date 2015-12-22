@@ -1,0 +1,10 @@
+en:
+  molecular:
+    flash:
+      campaigns:
+        create:
+          notice: Campagin successfully created
+    campaigns:
+      index:
+        title: Campaigns
+
