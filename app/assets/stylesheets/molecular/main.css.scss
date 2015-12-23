@@ -1,3 +1,108 @@
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-bottom: 30px;
+}
+
+.strips {
+  >li {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 15px 0;
+  }
+
+  >li:first-child {
+      border-top: 1px solid #e8e8e8;
+  }
+}
+
+.header {
+  margin-bottom: 50px;
+}
+
+.actions {
+  margin-top: 50px;
+}
+
+.data {
+  padding-left: 30px;
+}
+
+.meta-actions {
+  margin: 10px 0;
+
+  a {
+    color: #444444;
+  }
+}
+
+.campaign-compose {
+  max-width: 800px;
+  margin: 0 auto;
+
+  form .editor {
+    padding-top: 22px;
+  }
+}
+
+.stats {
+  >div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #d9d9d9;
+    border-left: 0 none;
+
+    &:first-child {
+      border-left: 1px solid #d9d9d9;
+      border-radius: 5px 0 0 5px;
+    }
+
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
+
+.meter-data {
+  margin-bottom: 5px;
+}
+
+ul.menu-list {
+  li {
+    background: image-url("molecular/bg-dots.png") transparent 0 15px repeat-x;
+    margin-bottom: 8px;
+
+    span {
+      background-color: #ffffff;
+
+      &:first-child {
+          padding-right: 10px;
+      }
+
+      &:last-child {
+          padding-left: 10px;
+      }
+    }
+  }
+}
+
+.sub-section {
+  margin-bottom: 40px;
+
+  >*:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.highlight {
+  color: #337ab7;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
 .btn-add {
   float: right;
   margin-top: -45px;
