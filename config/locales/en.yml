@@ -1,10 +1,96 @@
 en:
+  activerecord:
+    models:
+      molecular/campaign:
+        one: Campaign
+        other: Campaigns
+      molecular/recipient:
+        one: Recipient
+        other: Recipients
+    attributes:
+      molecular/campaign:
+        body: Content
+        from: From email address
+        from_name: From name
+        reply_to: Replies
+        sent_at: Sent at
+        subject: Subject
+      molecular/subscription/status:
+        queued: Pending
+        sent: Sent
+        bounced: Bounced
+        rejected: Rejected
+  close: Close
+  errors:
+    messages:
+      campaign:
+        not_saved:
+          one: "1 error prohibited this campaign from being saved:"
+          other: "%{count} errors prohibited this campaign from being saved:"
   molecular:
-    flash:
-      campaigns:
-        create:
-          notice: Campagin successfully created
     campaigns:
+      campaign:
+        click: "%{count} Clicked"
+        confirm_delete: Are you sure?
+        open: "%{count} Opened"
+        recipients: Recipients
+        sent_on: "Sent on %{date}"
+        status:
+          draft: Draft
+          sent: Sent
+      edit:
+        title: Campaign info
+      form:
+        save: Save and review
       index:
         title: Campaigns
-
+        create: Create campaign
+      new:
+        title: Campaign info
+      mail_preview_modal:
+        title: View email
+      preview:
+        actions:
+          edit: Edit
+          send: Send
+        recipients:
+          subtext: Campaign will be sent to
+          count:
+            one: "(1 recipient)"
+            other: "(%{count} recipients)"
+        reply_to:
+          subtext_html: "All replies will go to <strong>%{reply_to}</strong>"
+        body:
+            subtext: Preview the email content
+        title: Review your campaign before sending ...
+      report:
+        link:
+          view_body: View email
+        recipients:
+          label: Sent to
+          count:
+            one: "(1 recipient)"
+            other: "(%{count} recipients)"
+        opens:
+          rate: Open rate
+          total: Total opens
+          last: Last opened
+        clicks:
+          rate: Click rate
+          total: Total clicks
+          last: Last clicked
+        subtitle_overview: Overview
+        subtitle_links: Links clicked
+        subtitle_subscribers: Subscribers with most opens
+        title: Campaign report
+  flash:
+    campaigns:
+      already_sent: Campaign has already been sent.
+      created: Campaign was successfully created.
+      destroyed: Campaign was successfully destroyed.
+      scheduled: Campaign was scheduled.
+      update: Campaign was successfully updated.
+  time:
+    formats:
+      default_concise: "%a, %d %b %Y %H:%M"
+      default_date_with_time: "%m/%d/%Y %H:%M"

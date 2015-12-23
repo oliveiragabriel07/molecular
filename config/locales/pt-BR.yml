@@ -1,10 +1,100 @@
 pt-BR:
+  activerecord:
+    models:
+      molecular/campaign:
+        one: Campanha
+        other: Campanhas
+      molecular/recipient:
+        one: Destinatário
+        other: Destinatários
+    attributes:
+      molecular/campaign:
+        body: "Conteúdo"
+        from: "Email do remetente"
+        from_name: "Remetente"
+        reply_to: "Respostas"
+        sent_at: "Enviado em"
+        subject: "Assunto"
+      molecular/subscription/status:
+        queued: Pendente
+        sent: Entregue
+        bounced: Devolvido
+        rejected: Rejeitado
+  close: Fechar
+  errors:
+    messages:
+      campaign:
+        not_saved:
+          one: "1 erro impediu esta campanha de ser salva:"
+          other: "%{count} erros impediram esta campanha de ser salva:"
   molecular:
-    flash:
-      campaigns:
-        create:
-          notice: Campanha criada com sucesso
     campaigns:
+      campaign:
+        click:
+          one: "1 Clique"
+          other: "%{count} Cliques"
+        confirm_delete: "Você tem certeza?"
+        open:
+          one: "1 Abriu"
+          other: "%{count} Abriram"
+        recipients: Destinatários
+        sent_on: "Enviada em %{date}"
+        status:
+          draft: Rascunho
+          sent: Enviada
+      edit:
+        title: Informações da campanha
+      form:
+        save: Salvar e revisar
       index:
         title: Campanhas
-
+        create: Criar campanha
+      new:
+        title: Informações da campanha
+      mail_preview_modal:
+        title: Visualizar email
+      preview:
+        actions:
+          edit: Editar
+          send: Enviar
+        body:
+          subtext: Pré-visualizar o conteúdo do email
+        recipients:
+          subtext: A campanha será enviada para
+          count:
+            one: "(1 destinatário)"
+            other: "(%{count} destinatários)"
+        reply_to:
+          subtext_html: "Todas as respostas serão enviadas para <strong>%{reply_to}</strong>"
+        title: Revise sua campanha antes de enviar ...
+      report:
+        link:
+          view_body: Ver email
+        recipients:
+          label: Enviada para
+          count:
+            one: "(1 destinatário)"
+            other: "(%{count} destinatários)"
+        opens:
+          rate: Taxa de abertura
+          total: Total
+          last: Última
+        clicks:
+          rate: Taxa de cliques
+          total: Total
+          last: Último
+        subtitle_overview: Visão geral
+        subtitle_links: Cliques em links
+        subtitle_subscribers: Inscritos que mais abriram
+        title: Relatório da campanha
+  flash:
+    campaigns:
+      already_sent: A campanha já foi enviada.
+      created: Campanha criada com sucesso.
+      destroyed: Campanha removida com sucesso.
+      scheduled: A campanha foi programada para envio.
+      updated: Campanha atualizada com sucesso.
+  time:
+    formats:
+      default_concise: "%a, %d %b %Y %H:%M"
+      default_date_with_time: "%d/%m/%Y %H:%M"

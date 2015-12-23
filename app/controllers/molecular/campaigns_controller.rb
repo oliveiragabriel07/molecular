@@ -27,7 +27,7 @@ module Molecular
     # POST /campaigns
     def create
       if @campaign.save
-        redirect_to @campaign, notice: 'Campaign was successfully created.'
+        redirect_to @campaign, notice: I18n.t('flash.campaigns.created')
       else
         render :new
       end
@@ -38,7 +38,7 @@ module Molecular
       submit and return if params[:submit]
 
       if @campaign.update(campaign_params)
-        redirect_to @campaign, notice: 'Campaign was successfully updated.'
+        redirect_to @campaign, notice: I18n.t('flash.campaigns.updated')
       else
         render :edit
       end
@@ -47,7 +47,7 @@ module Molecular
     # DELETE /campaigns/1
     def destroy
       @campaign.destroy
-      redirect_to campaigns_url, notice: 'Campaign was successfully destroyed.'
+      redirect_to campaigns_url, notice: I18n.t('flash.campaigns.destroyed')
     end
 
     private
@@ -78,10 +78,10 @@ module Molecular
 
       def submit
         if @campaign.sent?
-          redirect_to @campaign, alert: 'Campaign has already been sent'
+          redirect_to @campaign, alert: I18n.t('flash.campaigns.already_sent')
         else
           @campaign.enqueue
-          redirect_to @campaign, notice: 'Campaign was scheduled'
+          redirect_to @campaign, notice: I18n.t('flash.campaigns.scheduled')
         end
       end
   end

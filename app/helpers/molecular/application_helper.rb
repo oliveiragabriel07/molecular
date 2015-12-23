@@ -8,5 +8,9 @@ module Molecular
         super
       end
     end
+
+    def ldate(dt, hash = {})
+      dt ? l(dt, hash) : '-'
+    end
   end
 end

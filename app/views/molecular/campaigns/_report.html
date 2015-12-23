@@ -1,69 +1,68 @@
 <div class="header">
-  <h1>Campaign report</h1>
+  <h1><%= t('.title') %></h1>
 </div>
 
-<h2>Overview</h2>
+<h2><%= t('.subtitle_overview') %></h2>
 
 <div class="row sub-section">
   <div class="col-md-6">
     <p>
-      <strong>Subject:</strong>
+      <strong><%= Molecular::Campaign.human_attribute_name(:subject) %>:</strong>
       <%= campaign.subject %>
     </p>
 
     <p>
-      <strong>Content:</strong>
-      <%= link_to 'View email', "#", data: {toggle: "modal", target: "#mail-preview-modal"} %>
+      <strong><%= Molecular::Campaign.human_attribute_name(:body) %>:</strong>
+      <%= link_to t('.link.view_body'), "#", data: {toggle: "modal", target: "#mail-preview-modal"} %>
     </p>
   </div>
 
   <div class="col-md-6">
     <p>
-      <strong>Sent at:</strong>
-      <%= campaign.sent_at.strftime('%a, %d %b %Y %H:%M') %>
+      <strong><%= Molecular::Campaign.human_attribute_name(:sent_at) %>:</strong>
+      <%= l(campaign.sent_at, format: :default_concise) %>
     </p>
 
     <p>
-      <strong>Sent to:</strong>
+      <strong><%= t('.recipients.label')%>:</strong>
+
+      <%# OPTIMIZE use link_to_if %>
       <% if Rails.application.routes.url_helpers.method_defined?(:molecular_recipients_path) %>
-        <%= link_to "#{campaign.recipients.count} recipients", main_app.molecular_recipients_path(q: campaign.recipients_query),
+        <%= link_to t('.recipients.count', count: campaign.recipients.count), main_app.molecular_recipients_path(q: campaign.recipients_query),
           target:"_blank" %>
       <% else %>
-        <%= "#{campaign.recipients.count} recipients" %>
+        <%= t('.recipients.count', count: campaign.recipients.count) %>
       <% end %>
     </p>
   </div>
 </div>
 
-<% open_rate = number_to_percentage(campaign.open_rate, precision: 1) %>
-<% click_rate = number_to_percentage(campaign.click_rate, precision: 1) %>
-
 <div class="row sub-section">
   <div class="col-md-6">
 
     <div class="meter-data clearfix">
-      <span class="pull-left strong">Open rate</span>
+      <span class="pull-left strong"><%= t('.opens.rate')%></span>
       <span class="h4 pull-right no-margin highlight">
-        <%= open_rate %>
+        <%= number_to_percentage(campaign.open_rate, precision: 1) %>
       </span>
     </div>
 
     <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= open_rate %>;">
+      <div class="progress-bar" role="progressbar" style="width: <%= number_to_percentage(campaign.open_rate, locale: :en) %>;">
       </div>
     </div>
 
     <ul class="list-unstyled menu-list">
       <li>
-        <span>Total opens</span>
+        <span><%= t('.opens.total') %></span>
         <span class="pull-right">
           <%= campaign.total_opens %>
         </span>
       </li>
       <li>
-        <span>Last opened</span>
+        <span><%= t('.opens.last') %></span>
         <span class="pull-right">
-          <%= campaign.last_open.try(:triggered_at).try(:strftime, '%m/%d/%Y %H:%M') || "-" %>
+          <%= ldate(campaign.last_open.try(:triggered_at), format: :default_date_with_time) %>
         </span>
       </li>
     </ul>
@@ -71,28 +70,28 @@
 
   <div class="col-md-6">
     <div class="meter-data clearfix">
-      <span class="pull-left strong">Click rate</span>
+      <span class="pull-left strong"><%= t('.clicks.rate')%></span>
       <span class="h4 pull-right no-margin highlight">
-        <%= click_rate %>
+        <%= number_to_percentage(campaign.click_rate, precision: 1) %>
       </span>
     </div>
 
     <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= click_rate %>;">
+      <div class="progress-bar" role="progressbar" style="width: <%= number_to_percentage(campaign.click_rate, locale: :en) %>;">
       </div>
     </div>
 
     <ul class="list-unstyled menu-list">
       <li>
-        <span>Total clicks</span>
+        <span><%= t('.clicks.total') %></span>
         <span class="pull-right">
           <%= campaign.total_clicks %>
         </span>
       </li>
       <li>
-        <span>Last clicked</span>
+        <span><%= t('.clicks.last') %></span>
         <span class="pull-right">
-          <%= campaign.last_click.try(:triggered_at).try(:strftime, '%m/%d/%Y %H:%M') || "-" %>
+          <%= ldate(campaign.last_click.try(:triggered_at), format: :default_date_with_time) %>
         </span>
       </li>
     </ul>
@@ -102,27 +101,27 @@
 <div class="stats text-center sub-section clearfix">
   <div class="col-md-3">
     <h4 class="highlight"><%= campaign.delivered_count %></h4>
-    <p>Delivered</p>
+    <p><%= Molecular::Subscription.human_attribute_name('status.sent') %></p>
   </div>
 
   <div class="col-md-3">
     <h4 class="highlight"><%= campaign.pending_count %></h4>
-    <p>Pending</p>
+    <p><%= Molecular::Subscription.human_attribute_name('status.queued') %></p>
   </div>
 
   <div class="col-md-3">
     <h4 class="highlight"><%= campaign.bounces_count %></h4>
-    <p>Bounced</p>
+    <p><%= Molecular::Subscription.human_attribute_name('status.bounced') %></p>
   </div>
 
   <div class="col-md-3">
     <h4 class="highlight"><%= campaign.rejected_count %></h4>
-    <p>Rejected</p>
+    <p><%= Molecular::Subscription.human_attribute_name('status.rejected') %></p>
   </div>
 </div>
 
 <% if campaign.events.clicks_by_link.any? %>
-  <h2>Links clicked</h2>
+  <h2><%= t('.subtitle_links') %></h2>
 
   <% clicks = campaign.events.clicks_by_link %>
   <ul class="list-unstyled sub-section strips">
@@ -131,7 +130,7 @@
 <% end %>
 
 <% if campaign.subscriptions.with_most_opens.any? %>
-  <h2>Subscribers with most opens</h2>
+  <h2><%= t('.subtitle_subscribers') %></h2>
 
   <% subscriptions = campaign.subscriptions.with_most_opens %>
   <ul class="list-unstyled sub-section strips">
