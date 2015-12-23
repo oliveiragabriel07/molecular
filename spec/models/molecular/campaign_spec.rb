@@ -28,6 +28,7 @@ module Molecular
       it { is_expected.to validate_presence_of(:owner) }
       it { is_expected.to validate_presence_of(:subject) }
       it { is_expected.to validate_presence_of(:body) }
+      it { is_expected.not_to allow_value("").for(:body) }
       it { is_expected.to validate_presence_of(:from) }
       it { is_expected.to validate_presence_of(:from_name) }
     end

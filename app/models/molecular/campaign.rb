@@ -5,7 +5,7 @@ module Molecular
     has_many :events, through: :subscriptions
 
     validates :subject, presence: true
-    validates :body, presence: true
+    validates :body, presence: true, allow_blank: false
     validates :owner, presence: true
     validates :from, presence: true
     validates :from_name, presence: true
