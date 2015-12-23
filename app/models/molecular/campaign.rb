@@ -38,19 +38,19 @@ module Molecular
     end
 
     def unique_opens
-      subscriptions.opened.to_a.size
+      subscriptions.opened.count
     end
 
     def unique_clicks
-      subscriptions.clicked.to_a.size
+      subscriptions.clicked.count
     end
 
     def total_opens
-      events.opens.count
+      subscriptions.sum(:opens_count)
     end
 
     def total_clicks
-      events.clicks.count
+      subscriptions.sum(:clicks_count)
     end
 
     def last_open

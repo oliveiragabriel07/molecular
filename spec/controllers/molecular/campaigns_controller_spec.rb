@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry-byebug'
 
 RSpec.describe Molecular::CampaignsController, type: :controller do
   routes { Molecular::Engine.routes }
@@ -104,11 +105,29 @@ RSpec.describe Molecular::CampaignsController, type: :controller do
         expect(response).to redirect_to(campaign)
       end
 
-      # xit 'updates campaing sent_at' do
-      #   expect(campaign.sent_at).to be_nil
-      #   CampaignSenderJob.perform_now(campaign)
-      #   expect(campaign.sent_at).not_to be_nil
-      # end
+      context "submit" do
+        context "fresh campaign" do
+          let!(:campaign) { create(:campaign, sent_at: nil) }
+
+          it 'enqueue campaign' do
+            put :update, id: campaign.to_param, submit: true
+
+            expect(response).to redirect_to(campaign)
+            expect(flash[:notice]).to eq(I18n.t('flash.campaigns.scheduled'))
+          end
+        end
+
+        context "campaign already sent" do
+          let!(:campaign) { create(:campaign, sent_at: Time.zone.now) }
+
+          it "sends already sent notice" do
+            put :update, id: campaign.to_param, submit: true
+
+            expect(response).to redirect_to(campaign)
+            expect(flash[:alert]).to eq(I18n.t('flash.campaigns.already_sent'))
+          end
+        end
+      end
     end
 
     context "with invalid params" do

@@ -75,30 +75,200 @@ module Molecular
           with(campaign)
         campaign.enqueue
       end
+
+      it 'updates campaing sent_at' do
+        expect(campaign.sent_at).to be_nil
+        campaign.enqueue
+        expect(campaign.sent_at).not_to be_nil
+      end
     end
 
     context '#sent?' do
-      xit 'TODO test sent? method' do
+      it 'returns true if sent_at is not nil' do
+        campaign = create(:campaign, sent_at: Time.zone.now)
+        expect(campaign.sent?).to eq(true)
       end
-    end
 
-    context '#open_rate' do
-      xit 'TODO test sent? method' do
-      end
-    end
-
-    context '#click_rate' do
-      xit 'TODO test sent? method' do
+      it 'returns false if sent_at is nil' do
+        campaign = create(:campaign, sent_at: nil)
+        expect(campaign.sent?).to eq(false)
       end
     end
 
     context '#unique_opens' do
-      xit 'TODO test sent? method' do
+      before do
+        create(:subscription, campaign: campaign, opens_count: 3)
+        create(:subscription, campaign: campaign, opens_count: 0)
+      end
+
+      it 'returns the number of unique opens' do
+        expect(campaign.unique_opens).to eq(1)
       end
     end
 
     context '#unique_clicks' do
-      xit 'TODO test sent? method' do
+      before do
+        create(:subscription, campaign: campaign, clicks_count: 3)
+        create(:subscription, campaign: campaign, clicks_count: 0)
+      end
+
+      it 'returns the number of unique clicks' do
+        expect(campaign.unique_clicks).to eq(1)
+      end
+    end
+
+    context '#open_rate' do
+      context 'with opened subscriptions' do
+        before do
+          create(:subscription, campaign: campaign, opens_count: 2)
+          create(:subscription, campaign: campaign, opens_count: 0)
+        end
+
+        it 'returns the ratio between unique opens and total subscriptions' do
+          expect(campaign.open_rate).to eq 50.to_f
+        end
+      end
+
+      context 'without opened subscriptions' do
+        before do
+          create(:subscription, campaign: campaign, opens_count: 0)
+        end
+
+        it 'returns zero' do
+          expect(campaign.open_rate).to eq 0.to_f
+        end
+      end
+
+      context 'with no subscriptions' do
+        it 'returns zero' do
+          expect(campaign.open_rate).to eq 0.to_f
+        end
+      end
+    end
+
+    context '#click_rate' do
+      context 'with clicked subscriptions' do
+        before do
+          create_list(:subscription, 3, campaign: campaign, clicks_count: 2)
+          create(:subscription, campaign: campaign, clicks_count: 0)
+        end
+
+        it 'returns the ratio between unique clicks and total subscriptions' do
+          expect(campaign.click_rate).to eq 75.to_f
+        end
+      end
+
+      context 'without clicked subscriptions' do
+        before do
+          create(:subscription, campaign: campaign, clicks_count: 0)
+        end
+
+        it 'returns zero' do
+          expect(campaign.click_rate).to eq 0.to_f
+        end
+      end
+
+      context 'with no subscriptions' do
+        it 'returns zero' do
+          expect(campaign.click_rate).to eq 0.to_f
+        end
+      end
+    end
+
+    context '#total_opens' do
+      before do
+        create(:subscription, campaign: campaign, opens_count: 2)
+        create(:subscription, campaign: campaign, opens_count: 1)
+        create(:subscription, campaign: campaign, opens_count: 0)
+      end
+
+      it 'returns opens_count sum' do
+        expect(campaign.total_opens).to eq(3)
+      end
+    end
+
+    context '#total_clicks' do
+      before do
+        create(:subscription, campaign: campaign, clicks_count: 1)
+        create(:subscription, campaign: campaign, clicks_count: 1)
+        create(:subscription, campaign: campaign, clicks_count: 0)
+      end
+
+      it 'returns clicks_count sum' do
+        expect(campaign.total_clicks).to eq(2)
+      end
+    end
+
+    context '#bounces_count' do
+      before do
+        create_list(:subscription, 2, campaign: campaign, status: :bounced)
+        create_list(:subscription, 3, campaign: campaign, status: :soft_bounced)
+      end
+
+      it 'returns the number of bounced and soft_bounced subscriptions' do
+        expect(campaign.bounces_count).to eq(5)
+      end
+    end
+
+    context '#rejected_count' do
+      before do
+        create_list(:subscription, 2, campaign: campaign, status: :rejected)
+      end
+
+      it 'returns the number of rejected subscriptions' do
+        expect(campaign.rejected_count).to eq(2)
+      end
+    end
+
+    context '#delivered_count' do
+      before do
+        create_list(:subscription, 1, campaign: campaign, status: :sent)
+      end
+
+      it 'returns the number of sent subscriptions' do
+        expect(campaign.delivered_count).to eq(1)
+      end
+    end
+
+    context '#pending_count' do
+      before do
+        create_list(:subscription, 5, campaign: campaign, status: :queued)
+      end
+
+      it 'returns the number of queued subscriptions' do
+        expect(campaign.pending_count).to eq(5)
+      end
+    end
+
+    context '#last_open' do
+      let(:subscription) { create(:subscription, campaign: campaign) }
+      let!(:last) do
+        create(:event, :open, subscription: subscription,
+                              triggered_at: Time.zone.now)
+      end
+      let!(:previous) do
+        create(:event, :open, subscription: subscription,
+                              triggered_at: Time.zone.now - 1.hour)
+      end
+
+      it 'returns the last open event' do
+        expect(campaign.last_open).to eq(last)
+      end
+    end
+
+    context '#last_click' do
+      let(:subscription) { create(:subscription, campaign: campaign) }
+      let!(:last) do
+        create(:event, :click, subscription: subscription,
+                               triggered_at: Time.zone.now)
+      end
+      let!(:previous) do
+        create(:event, :click, subscription: subscription,
+                               triggered_at: Time.zone.now - 1.hour)
+      end
+
+      it 'returns the last click event' do
+        expect(campaign.last_click).to eq(last)
       end
     end
   end

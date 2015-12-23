@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :molecular_event, aliases: [:event], class: 'Molecular::Event' do
     subscription
     label ""
+    triggered_at nil
 
     trait :click do
       label "click"
