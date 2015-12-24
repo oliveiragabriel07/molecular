@@ -8,7 +8,7 @@ module Molecular
 
     # GET /campaigns
     def index
-      @campaigns = @campaigns.includes(:subscriptions).page(page).per(10)
+      @campaigns = @campaigns.includes(:subscriptions).page(params[:page]).per(10)
     end
 
     # GET /campaigns/1
@@ -63,10 +63,6 @@ module Molecular
 
       def load_campaigns
         @campaigns = Campaign.where(owner: molecular_owner)
-      end
-
-      def page
-        params[:page]
       end
 
       # Only allow a trusted parameter "white list" through.

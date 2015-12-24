@@ -1,8 +1,4 @@
-<div class="header">
-  <h1><%= t('.title') %></h1>
-</div>
-
-<h2><%= t('.subtitle_overview') %></h2>
+<%= render partial: 'report_header', locals: {campaign: campaign, active: :overview}%>
 
 <div class="row sub-section">
   <div class="col-md-6">
@@ -111,7 +107,7 @@
 
   <div class="col-md-3">
     <h4 class="highlight"><%= campaign.bounces_count %></h4>
-    <p><%= Molecular::Subscription.human_attribute_name('status.bounced') %></p>
+    <p><%= Molecular::Subscription.human_attribute_name('status.soft_bounced') %></p>
   </div>
 
   <div class="col-md-3">

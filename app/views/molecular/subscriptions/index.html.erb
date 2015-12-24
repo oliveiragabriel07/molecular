@@ -1,0 +1,30 @@
+<%= render partial: 'molecular/campaigns/report_header', locals: {campaign: @campaign, active: :activity}%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Molecular::Subscription.human_attribute_name(:status) %></th>
+      <th><%= Molecular::Subscription.human_attribute_name(:email) %></th>
+      <th><%= Molecular::Subscription.human_attribute_name(:opens_count) %></th>
+      <th><%= Molecular::Subscription.human_attribute_name(:clicks_count) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "subscription", collection: @subscriptions %>
+  </tbody>
+</table>
+
+<%#
+  Workaround a kaminari issue with engine routes described in the link bellow:
+  https://github.com/amatsuda/kaminari/pull/322
+
+  A fix has been submited, but the PR still not merged:
+  https://github.com/amatsuda/kaminari/pull/636
+
+  In Molecular, kaminari fails because the routes are dynamically inserted
+  into the main app by mount_molecular method.
+%>
+
+<% _with_routes main_app.routes do %>
+  <%= paginate @subscriptions %>
+<% end %>

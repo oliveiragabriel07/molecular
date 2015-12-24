@@ -15,11 +15,19 @@ pt-BR:
         reply_to: "Respostas"
         sent_at: "Enviado em"
         subject: "Assunto"
+      molecular/subscription:
+        status: "Situação"
+        email: "Email"
+        opens_count: "Aberto"
+        clicks_count: "Cliques"
       molecular/subscription/status:
+        bounced: Devolvido (Persistente)
         queued: Pendente
-        sent: Entregue
-        bounced: Devolvido
         rejected: Rejeitado
+        sent: Entregue
+        soft_bounced: Devolvido
+        spam: Spam
+        unsub: Inscrição Cancelada
   close: Fechar
   errors:
     messages:
@@ -83,7 +91,8 @@ pt-BR:
           rate: Taxa de cliques
           total: Total
           last: Último
-        subtitle_overview: Visão geral
+        nav_overview: Visão geral
+        nav_activity: Atividade
         subtitle_links: Cliques em links
         subtitle_subscribers: Inscritos que mais abriram
         title: Relatório da campanha

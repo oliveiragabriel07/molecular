@@ -107,3 +107,30 @@ ul.menu-list {
   float: right;
   margin-top: -45px;
 }
+
+
+// local navigation
+
+.nav.nav-local {
+  border-bottom: 1px solid #ddd;
+
+  > li {
+    float: left;
+
+    > a {
+      color: #555555;
+      font-size: 18px;
+      padding: 10px 30px 15px 0;
+
+      &:hover,
+      &:focus{
+        background-color: transparent;
+        color: #23527c;
+      }
+    }
+
+    &.active > a {
+      color: #337ab7;
+    }
+  }
+}

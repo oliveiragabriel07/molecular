@@ -1,0 +1,6 @@
+<tr>
+  <td><%= Molecular::Subscription.human_attribute_name("status.#{subscription.status}") %></td>
+  <td><%= subscription.recipient.email %></td>
+  <td><%= subscription.opens_count %></td>
+  <td><%= subscription.clicks_count %></td>
+<tr>

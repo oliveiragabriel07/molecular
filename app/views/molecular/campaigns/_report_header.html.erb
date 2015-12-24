@@ -1,0 +1,12 @@
+<div class="header">
+  <h1><%= t('molecular.campaigns.report.title') %></h1>
+
+  <ul class="nav nav-local" role="tablist">
+    <li class=<%= if active == :overview then "active" else "" end %>>
+      <%= link_to t('molecular.campaigns.report.nav_overview'), campaign, role: "tab" %>
+    </li>
+    <li class=<%= if active == :activity then "active" else "" end %>>
+      <%= link_to t('molecular.campaigns.report.nav_activity'), campaign_subscriptions_path(campaign), role: "tab" %>
+    </li>
+  </ul>
+</div>
