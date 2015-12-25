@@ -1,7 +1,7 @@
 class CreateMolecularEvents < ActiveRecord::Migration
   def change
     create_table :molecular_events do |t|
-      t.references :subscription, index: true, foreign_key: true
+      t.references :subscription, index: true
       t.string :label
       t.string :value
       t.text :payload
