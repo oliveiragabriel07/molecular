@@ -5,6 +5,7 @@ module Molecular
     before_action :set_campaign, only: [:show, :edit, :update, :destroy]
     before_action :build_campaign, only: :create
     before_action :load_campaigns, only: :index
+    before_action :validate_status, only: [:edit, :update]
 
     # GET /campaigns
     def index
@@ -65,6 +66,11 @@ module Molecular
         @campaigns = Campaign.where(owner: molecular_owner)
       end
 
+      def validate_status
+        redirect_to @campaign, alert: I18n.t('flash.campaigns.already_sent') if
+          @campaign.sent?
+      end
+
       # Only allow a trusted parameter "white list" through.
       def campaign_params
         params.
@@ -73,12 +79,8 @@ module Molecular
       end
 
       def submit
-        if @campaign.sent?
-          redirect_to @campaign, alert: I18n.t('flash.campaigns.already_sent')
-        else
-          @campaign.enqueue
-          redirect_to @campaign, notice: I18n.t('flash.campaigns.scheduled')
-        end
+        @campaign.enqueue
+        redirect_to @campaign, notice: I18n.t('flash.campaigns.scheduled')
       end
   end
 end
