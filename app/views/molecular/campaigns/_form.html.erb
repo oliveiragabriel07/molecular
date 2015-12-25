@@ -13,7 +13,7 @@
       </div>
     <% end %>
 
-    <%= f.hidden_field :recipients_query, value: params['query'] %>
+    <%= f.hidden_field :recipients_query, value: params['query'] || @campaign.recipients_query %>
 
     <div class="row">
       <div class="col-md-12">
