@@ -13,8 +13,10 @@ h1, .h1, h2, .h2, h3, .h3 {
   }
 }
 
-.header {
-  margin-bottom: 50px;
+.page-header {
+  margin: 40px 0 30px;
+  padding: 0;
+  border: 0;
 }
 
 .actions {
@@ -33,13 +35,13 @@ h1, .h1, h2, .h2, h3, .h3 {
   }
 }
 
-.campaign-compose {
+.container-center {
   max-width: 800px;
   margin: 0 auto;
+}
 
-  form .editor {
-    padding-top: 22px;
-  }
+form .editor {
+  padding-top: 22px;
 }
 
 .stats {
@@ -105,7 +107,7 @@ ul.menu-list {
 
 .btn-add {
   float: right;
-  margin-top: -45px;
+  margin-top: 5px;
 }
 
 

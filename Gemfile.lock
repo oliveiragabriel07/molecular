@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    molecular (0.0.2)
+    molecular (0.0.4)
       coffee-rails (~> 4.1.0)
       jquery-rails (= 4.0.5)
       kaminari (~> 0.16.3)

@@ -3,3 +3,26 @@
 {<img src="https://coveralls.io/repos/oliveiragabriel07/molecular/badge.svg?branch=master&service=github" alt="Coverage Status" />}[https://coveralls.io/github/oliveiragabriel07/molecular?branch=master]
 
 This project rocks and uses MIT-LICENSE.
+
+# Active Job
+merged into rails 4.2
+for rails < 4.2 use: https://github.com/rails/activejob/tree/archive
+
+Example configuration
+config.active_job.queue_adapter = :resque
+
+# Recipients
+- campaign#recipients
+- recipients_query
+- param :query
+- molecular_recipients controller
+
+
+# Assets
+javascripts: molecular/application
+css (opcional): molecular/application
+
+# TinyMCE
+- tynimce.yml
+- custom skin
+- custom plugin
