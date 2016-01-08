@@ -103,6 +103,7 @@ pt-BR:
       destroyed: Campanha removida com sucesso.
       scheduled: A campanha foi programada para envio.
       updated: Campanha atualizada com sucesso.
+  popup_block_message: "Por favor, desabilite o bloqueador de popups no seu navegador"
   time:
     formats:
       default_concise: "%a, %d %b %Y %H:%M"

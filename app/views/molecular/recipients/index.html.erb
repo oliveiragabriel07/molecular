@@ -1,0 +1,7 @@
+<ul class="strips list-unstyled">
+  <%= render partial: "recipient", collection: @recipients %>
+</ul>
+
+<% _with_routes main_app.routes do %>
+  <%= paginate @recipients %>
+<% end %>

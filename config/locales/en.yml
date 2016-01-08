@@ -99,6 +99,7 @@ en:
       destroyed: Campaign was successfully destroyed.
       scheduled: Campaign was scheduled.
       update: Campaign was successfully updated.
+  popup_block_message: "Looks like your browser is blocking pop-up windows. Please enable them"
   time:
     formats:
       default_concise: "%a, %d %b %Y %H:%M"

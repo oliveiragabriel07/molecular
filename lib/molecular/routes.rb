@@ -7,6 +7,8 @@ module ActionDispatch::Routing
       resources :campaigns, controller: controllers[:campaigns] do
         resources :subscriptions, only: :index,
                                   controller: controllers[:subscriptions]
+        resources :recipients, only: :index,
+                               controller: controllers[:recipients]
       end
 
       resource :events, controller: controllers[:events],

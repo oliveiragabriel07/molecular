@@ -9,14 +9,7 @@
 
       <p>
         <%= t('.recipients.subtext') %>
-
-        <%# OPTIMIZE: use link_to_if %>
-        <% if Rails.application.routes.url_helpers.method_defined?(:molecular_recipients_path) %>
-          <%= link_to t('.recipients.count', count: campaign.recipients.count), main_app.molecular_recipients_path(q: campaign.recipients_query),
-            target:"_blank" %>
-        <% else %>
-          <%= t('.recipients.count', count: campaign.recipients.count) %>
-        <% end %>
+        <%= link_to_popup t('.recipients.count', count: campaign.recipients.count), campaign_recipients_path(@campaign) %>
       </p>
     </li>
 
