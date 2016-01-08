@@ -1,8 +1,7 @@
 default:
-    # TODO: get language from application
     language: 'pt_BR'
-    # # TODO: add css with content_css config
-    # # content_css : '/mycontent.css'
+    # TODO: add css with content_css config
+    #  content_css : '/mycontent.css'
     skin: 'light'
     max_width: 500
     max_height: 500

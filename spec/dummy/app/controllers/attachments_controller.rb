@@ -1,4 +1,6 @@
 class AttachmentsController < ApplicationController
+  layout false
+
   def new
     @attachment = Attachment.new
   end
