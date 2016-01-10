@@ -11,7 +11,7 @@ jQuery ->
 
     url = $(this).attr('href')
     message = $(this).data('blockedMessage')
-    options = 'toolbar=0,scrollbars=1,location=0,status=1,menubar=0,resizable=1,width=500,height=300'
+    options = $(this).data('options') || 'toolbar=0,scrollbars=1,location=0,status=1,menubar=0,resizable=1,width=500,height=300'
     callback = ->
       win = window.open url,'_blank', options
       checkPopupWin win, message
