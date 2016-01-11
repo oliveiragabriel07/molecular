@@ -4,15 +4,16 @@ module ActionDispatch::Routing
       controllers = Hash.new { |h, k| h[k] = "molecular/#{k}" }
       controllers.merge!(options)
 
-      resources :campaigns, controller: controllers[:campaigns] do
-        resources :subscriptions, only: :index,
+      resources :campaigns, path: 'molecular/campaigns',
+                            controller: controllers[:campaigns] do
+        resources :subscriptions, only: :index, path: 'molecular/subscriptions',
                                   controller: controllers[:subscriptions]
-        resources :recipients, only: :index,
+        resources :recipients, only: :index, path: 'molecular/recipients',
                                controller: controllers[:recipients]
       end
 
-      resource :events, controller: controllers[:events],
-                        only: [:show, :create]
+      resource :events, only: [:show, :create], path: 'molecular/events',
+                        controller: controllers[:events]
     end
   end
 end
