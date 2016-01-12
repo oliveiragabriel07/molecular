@@ -83,19 +83,24 @@ en:
           count:
             one: "(1 recipient)"
             other: "(%{count} recipients)"
-        opens:
-          rate: Open rate
-          total: Total opens
-          last: Last opened
-        clicks:
-          rate: Click rate
-          total: Total clicks
-          last: Last clicked
         nav_overview: Overview
         nav_activity: Activity
-        subtitle_links: Links clicked
-        subtitle_subscribers: Subscribers with most opens
         title: Campaign report
+      reports:
+        events:
+          opens:
+            rate: Open rate
+            total: Total opens
+            last: Last opened
+          clicks:
+            rate: Click rate
+            total: Total clicks
+            last: Last clicked
+          subtitle_links: Links clicked
+          subtitle_subscribers: Subscribers with most opens
+        empty:
+          title: You campaign has being scheduled!"
+          text: We are preparing to send the campaign. Soon you will have a report with the main statistics available.
   flash:
     campaigns:
       already_sent: Campaign has already been sent.

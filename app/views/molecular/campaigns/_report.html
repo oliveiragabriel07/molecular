@@ -1,6 +1,6 @@
-<%= render partial: 'report_header', locals: {campaign: campaign, active: :overview}%>
+<%= render partial: 'molecular/campaigns/reports/header', locals: {campaign: campaign, active: :overview}%>
 
-<div class="row sub-section">
+<div class="row sub-section report-summary">
   <div class="col-md-6">
     <p>
       <strong><%= Molecular::Campaign.human_attribute_name(:subject) %>:</strong>
@@ -26,103 +26,8 @@
   </div>
 </div>
 
-<div class="row sub-section">
-  <div class="col-md-6">
-
-    <div class="meter-data clearfix">
-      <span class="pull-left strong"><%= t('.opens.rate')%></span>
-      <span class="h4 pull-right no-margin highlight">
-        <%= number_to_percentage(campaign.open_rate, precision: 1) %>
-      </span>
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= number_to_percentage(campaign.open_rate, locale: :en) %>;">
-      </div>
-    </div>
-
-    <ul class="list-unstyled menu-list">
-      <li>
-        <span><%= t('.opens.total') %></span>
-        <span class="pull-right">
-          <%= campaign.total_opens %>
-        </span>
-      </li>
-      <li>
-        <span><%= t('.opens.last') %></span>
-        <span class="pull-right">
-          <%= ldate(campaign.last_open.try(:triggered_at), format: :default_date_with_time) %>
-        </span>
-      </li>
-    </ul>
-  </div>
-
-  <div class="col-md-6">
-    <div class="meter-data clearfix">
-      <span class="pull-left strong"><%= t('.clicks.rate')%></span>
-      <span class="h4 pull-right no-margin highlight">
-        <%= number_to_percentage(campaign.click_rate, precision: 1) %>
-      </span>
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= number_to_percentage(campaign.click_rate, locale: :en) %>;">
-      </div>
-    </div>
-
-    <ul class="list-unstyled menu-list">
-      <li>
-        <span><%= t('.clicks.total') %></span>
-        <span class="pull-right">
-          <%= campaign.total_clicks %>
-        </span>
-      </li>
-      <li>
-        <span><%= t('.clicks.last') %></span>
-        <span class="pull-right">
-          <%= ldate(campaign.last_click.try(:triggered_at), format: :default_date_with_time) %>
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="stats text-center sub-section clearfix">
-  <div class="col-md-3">
-    <h4 class="highlight"><%= campaign.delivered_count %></h4>
-    <p><%= Molecular::Subscription.human_attribute_name('status.sent') %></p>
-  </div>
-
-  <div class="col-md-3">
-    <h4 class="highlight"><%= campaign.pending_count %></h4>
-    <p><%= Molecular::Subscription.human_attribute_name('status.queued') %></p>
-  </div>
-
-  <div class="col-md-3">
-    <h4 class="highlight"><%= campaign.bounces_count %></h4>
-    <p><%= Molecular::Subscription.human_attribute_name('status.soft_bounced') %></p>
-  </div>
-
-  <div class="col-md-3">
-    <h4 class="highlight"><%= campaign.rejected_count %></h4>
-    <p><%= Molecular::Subscription.human_attribute_name('status.rejected') %></p>
-  </div>
-</div>
-
-<% if campaign.events.clicks_by_link.any? %>
-  <h2><%= t('.subtitle_links') %></h2>
-
-  <% clicks = campaign.events.clicks_by_link %>
-  <ul class="list-unstyled sub-section strips">
-    <%= render partial: 'click', collection: clicks, locals: {collection: clicks} %>
-  </ul>
-<% end %>
-
-<% if campaign.subscriptions.with_most_opens.any? %>
-  <h2><%= t('.subtitle_subscribers') %></h2>
-
-  <% subscriptions = campaign.subscriptions.with_most_opens %>
-  <ul class="list-unstyled sub-section strips">
-    <%= render partial: 'subscription', collection: subscriptions, locals: {collection: subscriptions} %>
-  </ul>
+<% if campaign.subscriptions.any? %>
+  <%= render partial: 'molecular/campaigns/reports/events', locals: {campaign: @campaign} %>
+<% else %>
+  <%= render partial: 'molecular/campaigns/reports/empty', locals: {campaign: @campaign} %>
 <% end %>

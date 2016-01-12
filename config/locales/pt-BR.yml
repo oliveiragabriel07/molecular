@@ -87,19 +87,24 @@ pt-BR:
           count:
             one: "(1 destinatário)"
             other: "(%{count} destinatários)"
-        opens:
-          rate: Taxa de abertura
-          total: Total
-          last: Última
-        clicks:
-          rate: Taxa de cliques
-          total: Total
-          last: Último
         nav_overview: Visão geral
         nav_activity: Atividade
-        subtitle_links: Cliques em links
-        subtitle_subscribers: Inscritos que mais abriram
         title: Relatório da campanha
+      reports:
+        events:
+          opens:
+            rate: Taxa de abertura
+            total: Total
+            last: Última
+          clicks:
+            rate: Taxa de cliques
+            total: Total
+            last: Último
+          subtitle_links: Cliques em links
+          subtitle_subscribers: Inscritos que mais abriram
+        empty:
+          title: "Sua campanha foi agendada!"
+          text: "Estamos nos preparando para enviar a campanha. Em breve você terá a disposição um relatório com as principais estatísticas."
   flash:
     campaigns:
       already_sent: A campanha já foi enviada.
