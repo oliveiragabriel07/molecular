@@ -28,7 +28,9 @@ pt-BR:
         soft_bounced: Devolvido
         spam: Spam
         unsub: Inscrição Cancelada
+  cancel: Cancelar
   close: Fechar
+  commit: Confirmar
   errors:
     messages:
       campaign:
@@ -41,7 +43,9 @@ pt-BR:
         click:
           one: "1 Clique"
           other: "%{count} Cliques"
-        confirm_delete: "Você tem certeza?"
+        delete_title: "Você tem certeza?"
+        delete_confirm: "Você está prestes a excluir esta campanha. Digite <b>EXCLUIR</b> para confirmar"
+        delete_verify: "EXCLUIR"
         open:
           one: "1 Abriu"
           other: "%{count} Abriram"

@@ -28,7 +28,9 @@ en:
         soft_bounced: Bounced
         spam: Spam
         unsub: Unsubscribed
+  cancel: Cancel
   close: Close
+  commit: Confirm
   errors:
     messages:
       campaign:
@@ -39,7 +41,9 @@ en:
     campaigns:
       campaign:
         click: "%{count} Clicked"
-        confirm_delete: Are you sure?
+        delete_title: Are you sure?
+        delete_confirm: "You're about to delete this campaign. Type <b>DELETE</b> to confirm"
+        delete_verify: "DELETE"
         open: "%{count} Opened"
         recipients: Recipients
         sent_on: "Sent on %{date}"

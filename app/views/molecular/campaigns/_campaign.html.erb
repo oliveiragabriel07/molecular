@@ -42,8 +42,14 @@
       </div>
   </div>
   <div class="col-md-1 meta-actions text-left">
-    <%# TODO: show a modal dialog %>
-    <%= link_to campaign, method: :delete, data: { confirm: t('.confirm_delete') } do %>
+    <%= link_to campaign, method: :delete,
+                          title: t('.delete_title'),
+                          data: {
+                            confirm: t('.delete_confirm'),
+                            verify: t('.delete_verify'),
+                            cancel: t(:cancel),
+                            commit: t(:commit)
+                          } do %>
       <i class="glyphicon glyphicon-trash"></i>
     <% end %>
   </div>
