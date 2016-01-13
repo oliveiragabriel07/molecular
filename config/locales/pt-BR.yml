@@ -56,6 +56,9 @@ pt-BR:
           sent: Enviada
       edit:
         title: Informações da campanha
+      empty:
+        title: Não há campanhas para exibir
+        text: As campanhas criadas por você serão exibidas aqui
       form:
         save: Salvar e revisar
       index:

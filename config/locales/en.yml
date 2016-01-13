@@ -52,6 +52,9 @@ en:
           sent: Sent
       edit:
         title: Campaign info
+      empty:
+        title: No campaigns ..
+        text: Your campaigns appear here
       form:
         save: Save and review
       index:

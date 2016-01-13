@@ -7,7 +7,7 @@
 
 
 <ul class="campaigns-list strips list-unstyled">
-  <%= render partial: "campaign", collection: @campaigns %>
+  <%= render(partial: "campaign", collection: @campaigns) || render(partial: "empty") %>
 </ul>
 
 <%#
