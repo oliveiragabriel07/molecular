@@ -3,13 +3,12 @@
 <div class="row sub-section report-summary">
   <div class="col-md-6">
     <p>
-      <strong><%= Molecular::Campaign.human_attribute_name(:subject) %>:</strong>
-      <%= campaign.subject %>
-    </p>
-
-    <p>
       <strong><%= Molecular::Campaign.human_attribute_name(:body) %>:</strong>
       <%= link_to t('.link.view_body'), "#", data: {toggle: "modal", target: "#mail-preview-modal"} %>
+    </p>
+    <p>
+      <strong><%= t('.recipients.label')%>:</strong>
+      <%= link_to t('.recipients.count', count: campaign.recipients.count), campaign_subscriptions_path(@campaign) %>
     </p>
   </div>
 
@@ -17,11 +16,6 @@
     <p>
       <strong><%= Molecular::Campaign.human_attribute_name(:sent_at) %>:</strong>
       <%= l(campaign.sent_at, format: :default_concise) %>
-    </p>
-
-    <p>
-      <strong><%= t('.recipients.label')%>:</strong>
-      <%= link_to t('.recipients.count', count: campaign.recipients.count), campaign_subscriptions_path(@campaign) %>
     </p>
   </div>
 </div>
