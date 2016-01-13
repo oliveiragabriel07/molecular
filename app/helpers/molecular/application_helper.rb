@@ -15,7 +15,7 @@ module Molecular
 
     def link_to_popup(name = nil, options = nil, html_options = {})
       default_options = {popup: true, blocked_message: t(:popup_block_message)}
-      html_options[:data] = (html_options[:data] || {}).merge(default_options)
+      html_options[:data] = default_options.merge(html_options[:data] || {})
 
       link_to name, options, html_options
     end
