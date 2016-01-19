@@ -1,11 +1,8 @@
 require "molecular/engine"
 
 module Molecular
-  # Use as Molecular.owner_class
-  # def mattr_accessor :owner_class
-  # def self.owner_class
-  #   @@owner_class.constantize
-  # end
+  # Address which sends Molecular e-mails.
+  mattr_accessor :mailer_sender
 
   def self.setup
     yield self
