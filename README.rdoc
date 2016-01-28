@@ -1,28 +1,98 @@
-= Molecular
+= \Molecular
 
+{<img src="https://codeship.com/projects/97fe6780-842f-0133-f7e4-1667e3eee00c/status?branch=master" alt="Status?branch=master" />}[https://codeship.com/projects/121880]
 {<img src="https://coveralls.io/repos/oliveiragabriel07/molecular/badge.svg?branch=master&service=github" alt="Coverage Status" />}[https://coveralls.io/github/oliveiragabriel07/molecular?branch=master]
 
-This project rocks and uses MIT-LICENSE.
+Molecular is an embeddedable one-time marketing email solution. It can be used
+to send emails to your application users database and track opens and clicks.
 
-# Active Job
-merged into rails 4.2
-for rails < 4.2 use: https://github.com/rails/activejob/tree/archive
+Current implementation depends on mandrill web-hooks to track email activity.
+
+== Getting started
+Molecular works with Rails 4.2 onwards. Add this to your Gemfile and run the
+bundle command
+
+  gem 'molecular', github: 'oliveiragabriel07/molecular'
+
+After you install Molecular and add it to your Gemfile, you need to run the
+generator:
+
+  rails generate molecular:install
+
+This will copy the needed model migrations, install an initializer at
+config/initializes/molecular.rb and configure config/routes.rb file to point to
+the Molecular controller.
+
+Apply the migrations to your database with:
+
+  rake db:migrate
+
+The install generator also copies a campaign_decorator.rb file to
+decoratos/models/molecular folder containing a definition to the #recipients
+method which MUST be implemented by the main application.
+
+
+== TinyMCE
+Molecular uses TinyMCE WYSIWYG editor for email composing. For TinyMCE to work
+properly you must include molecular/application assets to application.js
+manifest file
+
+  //= require jquery
+  //= require jquery_ujs
+  //= require molecular/application
+
+You can customize tinymce options through the tynimce.yml file as described in
+tinymce-rails (https://github.com/spohlenz/tinymce-rails)
+
+== Active Job
+Molecular uses ActiveJob to deliver emails to campaing subscribers in
+background. ActiveJob in merged into rails 4.2 and can be used with rails < 4.2
+through activejob gem:
+
+https://github.com/rails/activejob/tree/archive
+
+== Action Mailer
+config.action_mailer.default_options
 
 Example configuration
 config.active_job.queue_adapter = :resque
 
-# Recipients
-- campaign#recipients
-- recipients_query
+== Recipients
+- campaign#recipients method
+  - recipients_query
 - param :query
-- molecular_recipients controller
 
-
-# Assets
+== Assets
 javascripts: molecular/application
 css (opcional): molecular/application
 
-# TinyMCE
-- tynimce.yml
-- custom skin
-- custom plugin
+== Custom Views
+
+Since Molecular is an engine, all its views are packaged inside the gem. if you
+want to use custom views you just need to create a file at views/molecular
+matching the name of the views you want to override.
+
+== Custom Controllers
+Describe mount_molecular method
+
+== License
+
+MIT License.
+
+== TODO
+
+=== New features
+- Support variables replacement
+- Manage lists
+- Improve recipients selection
+- Add clicks and opens charts to report
+- Add sort and filters to campaign
+- Generate events / subscription reports
+
+
+=== Technical improvements
+- Remove dependency on mandrill
+- Extrac TinyMCE open-dialog plugin
+- Fix assets names: include molecular instead of molecular/application
+- Verify email domain
+- Implement views generator
