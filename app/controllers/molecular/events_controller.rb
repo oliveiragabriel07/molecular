@@ -64,7 +64,8 @@ module Molecular
 
       def load_and_update_subscription(payload)
         return unless payload.subscription_id
-        subscription = Subscription.find(payload.subscription_id)
+        subscription = Subscription.find_by(id: payload.subscription_id)
+        return unless subscription
         subscription.update(status: payload.status) if payload.status
         subscription
       end
