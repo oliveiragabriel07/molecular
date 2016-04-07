@@ -10,4 +10,5 @@ module Molecular
 end
 
 require "molecular/controller_additions"
+require 'molecular/webhook_processor'
 require "mandrill-rails/event_decorator"

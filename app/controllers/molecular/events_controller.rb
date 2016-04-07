@@ -5,69 +5,18 @@ module Molecular
     include Mandrill::Rails::WebHookProcessor
     ignore_unhandled_events!
 
-    def handle_open(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload))
+    def process_event(payload)
+      Molecular::WebhookProcessor.run(payload)
     end
 
-    def handle_click(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload).merge(value: payload['url']))
-    end
-
-    def handle_spam(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload))
-    end
-
-    def handle_unsub(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload))
-    end
-
-    def handle_reject(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload))
-    end
-
-    def handle_send(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload))
-    end
-
-    def handle_deferral(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload))
-    end
-
-    def handle_hard_bounce(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload)
-        .merge(value: payload.bounce_description))
-    end
-
-    def handle_soft_bounce(payload)
-      return unless load_and_update_subscription(payload)
-      Event.create(event_params(payload)
-        .merge(value: payload.bounce_description))
-    end
-
-    private
-      def event_params(payload)
-        {
-          label: payload['event'],
-          triggered_at: Time.at(payload['ts']).utc.to_datetime,
-          subscription_id: payload.subscription_id,
-          payload: payload.to_s
-        }
-      end
-
-      def load_and_update_subscription(payload)
-        return unless payload.subscription_id
-        subscription = Subscription.find_by(id: payload.subscription_id)
-        return unless subscription
-        subscription.update(status: payload.status) if payload.status
-        subscription
-      end
+    alias_method :handle_soft_bounce, :process_event
+    alias_method :handle_hard_bounce, :process_event
+    alias_method :handle_deferral, :process_event
+    alias_method :handle_send, :process_event
+    alias_method :handle_reject, :process_event
+    alias_method :handle_unsub, :process_event
+    alias_method :handle_spam, :process_event
+    alias_method :handle_click, :process_event
+    alias_method :handle_open, :process_event
   end
 end
