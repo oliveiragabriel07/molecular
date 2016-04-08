@@ -2,6 +2,13 @@ require 'spec_helper'
 
 module Molecular
   RSpec.describe ApplicationHelper, type: :helper do
+    describe "method_missing" do
+      it 'call my_resource_path on main_app' do
+        expect(main_app).to receive(:my_resource_path)
+        helper.my_resource_path
+      end
+    end
+
     describe "ldate" do
       it 'returns localized date' do
         date = Time.zone.now.at_beginning_of_month + 8.hours
