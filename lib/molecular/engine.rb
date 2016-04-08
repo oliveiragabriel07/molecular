@@ -5,6 +5,7 @@ require 'rails-i18n'
 require 'jquery-rails'
 require 'tinymce-rails'
 require 'tinymce-rails-langs'
+require 'gridhook'
 
 module Molecular
   class Engine < ::Rails::Engine

@@ -18,11 +18,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.mandrillapp.com',
+    address:              ENV['SMTP_ADDRESS'],
+    user_name:            ENV['SMTP_USERNAME'],
+    password:             ENV['SMTP_PASSWORD'],
     port:                 587,
     domain:               'heroku.com',
-    user_name:            ENV['MANDRILL_USERNAME'],
-    password:             ENV['MANDRILL_APIKEY'],
     authentication:       'plain'
   }
 

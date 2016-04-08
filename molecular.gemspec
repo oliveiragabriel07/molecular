@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'tinymce-rails'
   s.add_dependency 'tinymce-rails-langs'
   s.add_dependency 'rails-i18n', '~> 4.0.0'
+  s.add_dependency 'gridhook'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency 'rspec-rails'

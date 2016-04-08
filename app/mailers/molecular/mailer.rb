@@ -6,7 +6,15 @@ module Molecular
         format.html { render html: campaign.body.html_safe }
       end
 
-      headers['X-MC-Metadata'] = {subscription_id: id}.to_json
+      custom_args = {
+        subscription_id: id
+      }
+
+      # Mandrill custom headers
+      headers['X-MC-Metadata'] = custom_args.to_json
+
+      # Sendgrid custom headers
+      headers['X-SMTPAPI'] = {unique_args: custom_args}.to_json
     end
 
     private
