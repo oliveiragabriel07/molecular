@@ -1,7 +1,7 @@
 require_dependency "molecular/application_controller"
 
 module Molecular
-  class EventsController < ApplicationController
+  class EventsController < ActionController::Base
     include Mandrill::Rails::WebHookProcessor
     ignore_unhandled_events!
 
