@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    molecular (0.0.8)
+    molecular (0.0.10)
       coffee-rails (~> 4.1.0)
       gridhook
       jquery-rails (= 4.0.5)

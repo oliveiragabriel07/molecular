@@ -3,8 +3,6 @@ require 'pry-byebug'
 
 module Molecular
   RSpec.describe SubscriptionsController, type: :controller do
-    routes { Molecular::Engine.routes }
-
     let!(:campaign) { create(:campaign) }
 
     describe "GET #index" do

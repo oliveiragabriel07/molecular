@@ -1,7 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
-  mount_molecular campaigns: 'custom_molecular/campaigns'
+  mount_molecular
   mount Resque::Server, at: '/resque'
 
   resource :attachments, only: [:new, :create]

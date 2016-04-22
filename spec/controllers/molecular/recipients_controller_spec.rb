@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'pry-byebug'
 
 RSpec.describe Molecular::RecipientsController, type: :controller do
-  routes { Molecular::Engine.routes }
 
   let(:campaign) { create(:campaign) }
   let(:users) { create_list(:user, 3) }
